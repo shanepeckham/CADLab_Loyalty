@@ -62,6 +62,8 @@ You can now invoke your logic app with Postman - add the URL and select POST. En
   "id": 1
 }
 
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/PostManHeaders.jpg)
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/PostManBody.jpg)
 
 
 
