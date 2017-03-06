@@ -53,4 +53,4 @@ For this Hackathon you will require:
 
 Create a HTTP Request Step, click save - you will receive an endpoint upon save. 
 
-
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/HTTP%20Request.jpg)
