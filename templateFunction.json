@@ -1,0 +1,151 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+         "sites_MiniCADFunctionApp_name": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "storageAccounts_functionStorage_name": {
+              "defaultValue": "",
+            "type": "String"
+        },
+        "serverfarms_DynamicsFunction_name": {
+            "defaultValue": "",
+            "type": "String"
+        },
+        "repoURL": {
+            "type": "string",
+            "defaultValue": "https://github.com/shanepeckham/CADCouponFunction.git",
+            "metadata": {
+                "description": "The URL for the GitHub repository that contains the project to deploy."
+            }
+        },
+        "branch": {
+            "type": "string",
+            "defaultValue": "master",
+            "metadata": {
+                "description": "The branch of the GitHub repository to use."
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+    {
+            "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Web/serverfarms/CADContactsAPIMaster'.",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic",
+                "size": "Y1",
+                "family": "Y",
+                "capacity": 0
+            },
+            "kind": "functionapp",
+         //   "name": "[parameters('serverfarms_CADContactsAPIMaster_name')]",
+            "name": "[concat(parameters('serverfarms_DynamicsFunction_name'), uniqueString(resourceGroup().id, deployment().name))]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "properties": {
+           //     "name": "[parameters('serverfarms_CADContactsAPIMaster_name')]",
+                "name": "[concat(parameters('serverfarms_DynamicsFunction_name'), uniqueString(resourceGroup().id, deployment().name))]",
+                "numberOfWorkers": 0
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/cadsession2016/providers/Microsoft.Storage/storageAccounts/function90748434a820'.",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[concat(parameters('storageAccounts_functionStorage_name'), uniqueString(resourceGroup().id, deployment().name))]",
+            "apiVersion": "2016-01-01",
+            "location": "northeurope",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Web/sites/CADSession2016FunctionApp'.",
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(resourceGroup().id, deployment().name))]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "tags": {
+     //           "hidden-related:/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourcegroups/CADSession2016/providers/Microsoft.Web/serverfarms/CADContactsAPIMaster": "empty"
+            },
+            "properties": {
+                "name": "[concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(resourceGroup().id, deployment().name))]",
+                "hostNames": [
+             //       "cadsession2016functionapp.azurewebsites.net"
+                     "[concat(concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(resourceGroup().id, deployment().name)), '.azurewebsites.net')]"
+                ],
+                "enabledHostNames": [
+            //        "cadsession2016functionapp.azurewebsites.net",
+                    "[concat(concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(resourceGroup().id, deployment().name)), '.azurewebsites.net')]",
+                   // "cadsession2016functionapp.scm.azurewebsites.net"
+                    "[concat(concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(resourceGroup().id, deployment().name)), '.scm.azurewebsites.net')]"
+                ],
+                "hostNameSslStates": [
+                    {
+                      //  "name": "[concat(parameters('sites_MiniCADFunctionApp_name'),'cadsession2016functionapp.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_MiniCADFunctionApp_name'), concat(parameters('sites_MiniCADFunctionApp_name'), '.azurewebsites.net'))]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                       // "name": "[concat(parameters('sites_MiniCADFunctionApp_name'),'cadsession2016functionapp.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_MiniCADFunctionApp_name'), concat(parameters('sites_MiniCADFunctionApp_name'), '.scm.azurewebsites.net'))]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+               // "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CADContactsAPIMaster_name'))]"
+               "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', concat(parameters('serverfarms_DynamicsFunction_name'), uniqueString(resourceGroup().id, deployment().name)))]"
+            },
+            "resources": [
+                {
+                    "apiVersion": "2015-08-01",
+                    "name": "web",
+                    "type": "sourcecontrols",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(resourceGroup().id, deployment().name)))]"
+                ],
+                "properties": {
+                    "RepoUrl": "[parameters('repoURL')]",
+                    "branch": "[parameters('branch')]",
+                    "IsManualIntegration": true
+                    }
+                }
+                /*
+                {
+                    "apiVersion": "2015-08-01",
+                    "name": "appsettings",
+                    "type": "config",
+                    "dependsOn": [
+                         "[resourceId('Microsoft.Web/Sites', concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(resourceGroup().id, deployment().name)))]",
+                         "[resourceId('Microsoft.Storage/storageAccounts', concat(parameters('storageAccounts_functionStorage_name'), uniqueString(resourceGroup().id, deployment().name)))]"
+                    ],
+                    "properties": {
+                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', concat(parameters('storageAccounts_functionStorage_name'), uniqueString(resourceGroup().id, deployment().name)),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', concat(parameters('storageAccounts_functionStorage_name'), uniqueString(resourceGroup().id, deployment().name))), '2015-05-01-preview').key1,';')]", 
+                        "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', concat(parameters('storageAccounts_functionStorage_name'), uniqueString(resourceGroup().id, deployment().name)),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', concat(parameters('storageAccounts_functionStorage_name'), uniqueString(resourceGroup().id, deployment().name))), '2015-05-01-preview').key1,';')]", 
+                        "FUNCTIONS_EXTENSION_VERSION": "latest"
+                    }
+                } 
+                */
+                ],
+            "dependsOn": [
+               // "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_CADContactsAPIMaster_name'))]"
+                "[resourceId('Microsoft.Web/serverfarms', concat(parameters('serverfarms_DynamicsFunction_name'), uniqueString(resourceGroup().id, deployment().name)))]"
+            ]
+        }
+   ]
+}

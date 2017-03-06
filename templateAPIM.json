@@ -1,0 +1,140 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "service_cadsession2016apim_name": {
+            "defaultValue": "cadsession2016apim",
+            "type": "String"
+        },
+            "virtualNetworks_CADSession2016VNET_name": {
+            "defaultValue": "CADSession2016VNET",
+            "type": "String"
+        },
+           "networkSecurityGroups_CADSession2016VM_nsg_name": {
+            "defaultValue": "CADSession2016VM-nsg",
+            "type": "String"
+        },
+           "APIM_Publisher_Email": {
+           "defaultValue": "test@test.com",
+           "type": "string"    
+        },
+           "APIM_Publisher_Name": {
+           "defaultValue": "test",
+           "type": "string"    
+        }
+    },
+    "variables": {},
+    "resources": [
+       {
+            "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.ApiManagement/service/cadsession2016apim'.",
+            "type": "Microsoft.ApiManagement/service",
+            "sku": {
+                "name": "Developer",
+                "capacity": 1
+            },
+            "name": "[parameters('service_cadsession2016apim_name')]",
+            "apiVersion": "2016-07-07",
+            "location": "North Europe",
+            "tags": {},
+            "properties": {
+                "publisherEmail": "[parameters('APIM_Publisher_Email')]",
+                "publisherName": "[parameters('APIM_Publisher_Name')]",
+                "provisioningState": "Stopped",
+                "targetProvisioningState": "",
+                "createdAtUtc": "2016-12-18T19:47:37.5182495Z",
+                "runtimeUrl": "[concat('https://', parameters('service_cadsession2016apim_name'),'.azure-api.net')]",
+                "portalUrl": "[concat('https://', parameters('service_cadsession2016apim_name'),'.portal.azure-api.net')]",
+                "managementApiUrl": "[concat('https://', parameters('service_cadsession2016apim_name'),'.management.azure-api.net')]",
+                "scmUrl": "[concat('https://', parameters('service_cadsession2016apim_name'),'.scm.azure-api.net')]",
+                "addresserEmail": null,
+                "hostnameConfigurations": [],
+                "staticIPs": [],
+                "additionalLocations": null,
+                "vpnconfiguration": {
+                    "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADSession2016VNET_name')), '/subnets/internal')]",
+                    "location": "North Europe"
+                },
+                "customProperties": null,
+                "vpnType": 1
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADSession2016VNET_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/networkSecurityGroups/CADSession2016VM-nsg'.",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[parameters('networkSecurityGroups_CADSession2016VM_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-ssh",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "node_in",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "8000",
+                            "sourceAddressPrefix": "10.1.0.0/24",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1010,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/virtualNetworks/CADSession2016VNET'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_CADSession2016VNET_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.1.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "internal",
+                        "properties": {
+                            "addressPrefix": "10.1.0.0/24"
+                        }
+                    },
+                    {
+                        "name": "internalnetwork",
+                        "properties": {
+                            "addressPrefix": "10.1.1.0/24",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADSession2016VM_nsg_name'))]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADSession2016VM_nsg_name'))]"
+            ]
+        }
+    ]
+}

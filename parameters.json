@@ -1,0 +1,75 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "components_CADContactsAPIMaster_name": {
+            "value": "MiniCADAP"
+        },
+         "serverfarms_CADContactsAPIMaster_name": {
+            "value": "MiniCADFarm"
+        },
+        "sites_CADContactsAPIMaster_name": {
+            "value": "MiniCADSite"
+        },
+        "service_cadsession2016apim_name": {
+            "value": "MiniCAD123API"
+        },
+        "virtualNetworks_CADSession2016VNET_name": {
+            "value": "MiniCAD123VNETName"
+        },
+        "networkSecurityGroups_CADSession2016VM_nsg_name": {
+            "value": "MiniCAD123NSG"
+        },
+        "APIM_Publisher_Email": {
+            "value": "admin@minicad.com"
+        },
+        "APIM_Publisher_Name": {
+            "value": "admin_minicad"
+        },
+        "sites_MiniCADFunctionApp_name": {
+            "value": "MiniCADFunctionApp"
+        },
+       "storageAccounts_functionStorage_name": {
+            "value": "funcstorage"
+        },
+          "serverfarms_DynamicsFunction_name": {
+            "value": "MiniCADFarm"
+        },
+        "virtualMachines_CADSession2016LegacyAPI_adminPassword": {
+            "value": "MiniCAD123"
+        },
+        "networkInterfaces_cadsession2016legacy925_name": {
+            "value": "MiniCAD123l925"
+        },
+        "networkInterfaces_ukcadcontactsmasterv798_name": {
+            "value": "MiniCAD123v798"
+        },
+        "networkSecurityGroups_CADSession2016VM_nsg_name": {
+            "value": "MiniCAD123NSG"
+        },
+        "networkSecurityGroups_UKCADContactsMasterVM_nsg_name": {
+            "value": "MiniCAD123NSGMaster"
+        },
+        "publicIPAddresses_CADSession2016LegacyAPI_ip_name": {
+            "value": "MiniCAD123IPLegacy"
+        },
+        "publicIPAddresses_CADSession2016VM_ip_name": {
+            "value": "MiniCAD123IP"
+        },
+        "publicIPAddresses_UKCADContactsMasterVM_ip_name": {
+            "value": "MiniCAD123VMIP"
+        },
+        "virtualNetworks_CADSession2016_vnet_name": {
+            "value": "MiniCAD123VNET"
+        },
+        "virtualNetworks_CADSession2016VNET_name": {
+            "value": "MiniCAD123VNETName"
+        },
+        "storageAccounts_cadsession2016diag161_name": {
+            "value": "minicadstoragewhatfor"
+        },
+        "storageAccounts_cadsession2016disks890_name": {
+            "value": "minicadsks123whatfor"
+        }
+    }
+}
