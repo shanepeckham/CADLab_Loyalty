@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "virtualMachines_CADSession2016LegacyAPI_adminPassword": {
+        "virtualMachines_CADLegacyAPI_adminPassword": {
             "defaultValue": null,
             "type": "SecureString"
         },
@@ -10,7 +10,7 @@
             "defaultValue": "CADSession2016LegacyAPI",
             "type": "String"
         },
-           "networkInterfaces_cadsession2016legacy925_name": {
+           "networkInterfaces_cadlegacy925_name": {
             "defaultValue": "cadsession2016legacy925",
             "type": "String"
         },
@@ -18,7 +18,7 @@
             "defaultValue": "ukcadcontactsmasterv798",
             "type": "String"
         },
-        "networkSecurityGroups_CADSession2016VM_nsg_name": {
+        "networkSecurityGroups_CADVM_nsg_name": {
             "defaultValue": "CADSession2016VM-nsg",
             "type": "String"
         },
@@ -26,11 +26,11 @@
             "defaultValue": "UKCADContactsMasterVM-nsg",
             "type": "String"
         },
-        "publicIPAddresses_CADSession2016LegacyAPI_ip_name": {
+        "publicIPAddresses_CADLegacyAPI_ip_name": {
             "defaultValue": "CADSession2016LegacyAPI-ip",
             "type": "String"
         },
-        "publicIPAddresses_CADSession2016VM_ip_name": {
+        "publicIPAddresses_CADVM_ip_name": {
             "defaultValue": "CADSession2016VM-ip",
             "type": "String"
         },
@@ -38,19 +38,19 @@
             "defaultValue": "UKCADContactsMasterVM-ip",
             "type": "String"
         },
-        "virtualNetworks_CADSession2016_vnet_name": {
+        "virtualNetworks_CAD_vnet_name": {
             "defaultValue": "CADSession2016-vnet",
             "type": "String"
         },
-        "virtualNetworks_CADSession2016VNET_name": {
+        "virtualNetworks_CADVNET_name": {
             "defaultValue": "CADSession2016VNET",
             "type": "String"
         },
-         "storageAccounts_cadsession2016diag161_name": {
+         "storageAccounts_caddiag161_name": {
             "defaultValue": "cadsession2016diag161",
             "type": "String"
         },
-        "storageAccounts_cadsession2016disks890_name": {
+        "storageAccounts_disks890_name": {
             "defaultValue": "cadsession2016disks890",
             "type": "String"
         }
@@ -78,7 +78,7 @@
                         "name": "[parameters('virtualMachines_CADSession2016LegacyAPI_name')]",
                         "createOption": "FromImage",
                         "vhd": {
-                            "uri": "[concat('https', '://', parameters('storageAccounts_cadsession2016disks890_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_CADSession2016LegacyAPI_name'),'20161220143326.vhd'))]"
+                            "uri": "[concat('https', '://', parameters('storageAccounts_disks890_name'), '.blob.core.windows.net', concat('/vhds/', parameters('virtualMachines_CADSession2016LegacyAPI_name'),'20161220143326.vhd'))]"
                          //     "uri": "https://cadsession2016disks890.blob.core.windows.net/vhds/CADSession2016LegacyAPI20161220143326.vhd"
                         },
                         "caching": "ReadWrite"
@@ -92,26 +92,26 @@
                         "disablePasswordAuthentication": false
                     },
                     "secrets": [],
-                    "adminPassword": "[parameters('virtualMachines_CADSession2016LegacyAPI_adminPassword')]"
+                    "adminPassword": "[parameters('virtualMachines_CADLegacyAPI_adminPassword')]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_cadsession2016legacy925_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_cadlegacy925_name'))]"
                         }
                     ]
                 }
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_cadsession2016disks890_name'))]",
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_cadsession2016legacy925_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_disks890_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_cadlegacy925_name'))]"
             ]
         },
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/networkSecurityGroups/CADSession2016VM-nsg'.",
             "type": "Microsoft.Network/networkSecurityGroups",
-            "name": "[parameters('networkSecurityGroups_CADSession2016VM_nsg_name')]",
+            "name": "[parameters('networkSecurityGroups_CADVM_nsg_name')]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -150,7 +150,7 @@
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/networkInterfaces/cadsession2016legacy925'.",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[parameters('networkInterfaces_cadsession2016legacy925_name')]",
+            "name": "[parameters('networkInterfaces_cadlegacy925_name')]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -161,10 +161,10 @@
                             "privateIPAddress": "10.1.1.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_CADSession2016LegacyAPI_ip_name'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_CADLegacyAPI_ip_name'))]"
                             },
                             "subnet": {
-                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADSession2016VNET_name')), '/subnets/internalnetwork')]"
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADVNET_name')), '/subnets/internalnetwork')]"
                             }
                         }
                     }
@@ -176,14 +176,14 @@
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_CADSession2016LegacyAPI_ip_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADSession2016VNET_name'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_CADLegacyAPI_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADVNET_name'))]"
             ]
         },
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/publicIPAddresses/CADSession2016LegacyAPI-ip'.",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[parameters('publicIPAddresses_CADSession2016LegacyAPI_ip_name')]",
+            "name": "[parameters('publicIPAddresses_CADLegacyAPI_ip_name')]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -196,7 +196,7 @@
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/publicIPAddresses/CADSession2016VM-ip'.",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[parameters('publicIPAddresses_CADSession2016VM_ip_name')]",
+            "name": "[parameters('publicIPAddresses_CADVM_ip_name')]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -209,7 +209,7 @@
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/virtualNetworks/CADSession2016-vnet'.",
             "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetworks_CADSession2016_vnet_name')]",
+            "name": "[parameters('virtualNetworks_CAD_vnet_name')]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -233,7 +233,7 @@
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/virtualNetworks/CADSession2016VNET'.",
             "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetworks_CADSession2016VNET_name')]",
+            "name": "[parameters('virtualNetworks_CADVNET_name')]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -254,7 +254,7 @@
                         "properties": {
                             "addressPrefix": "10.1.1.0/24",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADSession2016VM_nsg_name'))]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADVM_nsg_name'))]"
                             }
                         }
                     }
@@ -262,7 +262,7 @@
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADSession2016VM_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADVM_nsg_name'))]"
             ]
         },
         {
@@ -273,7 +273,7 @@
                 "tier": "Standard"
             },
             "kind": "Storage",
-            "name": "[parameters('storageAccounts_cadsession2016diag161_name')]",
+            "name": "[parameters('storageAccounts_caddiag161_name')]",
             "apiVersion": "2016-01-01",
             "location": "northeurope",
             "tags": {},
@@ -289,7 +289,7 @@
                 "tier": "Premium"
             },
             "kind": "Storage",
-            "name": "[parameters('storageAccounts_cadsession2016disks890_name')]",
+            "name": "[parameters('storageAccounts_disks890_name')]",
             "apiVersion": "2016-01-01",
             "location": "northeurope",
             "tags": {},
