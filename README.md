@@ -54,3 +54,14 @@ For this Hackathon you will require:
 Create a HTTP Request Step, click save - you will receive an endpoint upon save. 
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/HTTP%20Request.jpg)
+
+You can now invoke your logic app with Postman - add the URL and select POST. Ensure you have set the Header "Content-Type" with value "application/json". Select body, select "raw" and enter the follow value for your body content:
+
+{
+  "APIMKey": "[Your APIM Key goes here]",
+  "id": 1
+}
+
+
+
+
