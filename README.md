@@ -19,6 +19,7 @@ The solution aims to show the following:
 *	The ease with which On-premise, public and private components may be brought together to build workloads that bring business value
 *	The meshing of IaaS, PaaS, SaaS, Serverless and AI with tools that are accessible to non-developers
 *	OSS workloads running on Azure
+* How to lock down a public app services API to only accept requests from API Management
 
 # Technology used
 
