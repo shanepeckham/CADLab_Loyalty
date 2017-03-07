@@ -29,7 +29,7 @@ The following technology components are used in this solution:
 *	Ubuntu with a custom extension template to rapidly provision and deploy a custom image with an running solution (IaaS)
 *	Azure networking to isolate legacy workloads (IaaS)
 *	API Management to govern APIs and to bridge publicly accessible APIs with isolated APIs (SaaS) (IaaS)
-*	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens](https://github.com/xstof/Quiz) 
+*	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens and Katrien de Grave](https://github.com/xstof/Quiz) 
 *	Azure logic apps to provide serverless integration that is accessible to non-developers (Serveless)
 *	Azure Resource Manager templates to automate the provisioning and inflation of a full environment
 *	The Azure CLI 2.0
