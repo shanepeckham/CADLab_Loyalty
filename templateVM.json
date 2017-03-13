@@ -296,6 +296,28 @@
             "properties": {},
             "resources": [],
             "dependsOn": []
+        },
+        {
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "name": "[concat(variables('vmName'),'/installcustomscript')]",
+        "apiVersion": "2016-01-01",
+  //      "location": "[resourceGroup().location]",
+        "location": "northeurope",
+        "dependsOn": [
+            "[parameters('virtualMachines_CADSession2016LegacyAPI_name')]"
+        ],
+        "properties": {
+            "publisher": "Microsoft.Azure.Extensions",
+            "type": "CustomScript",
+            "typeHandlerVersion": "2.0",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+                "fileUris": [
+                    "https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/installVM.sh"
+                ],
+                "commandToExecute": "sh install.sh"
+                }
         }
+       }
     ]
 }
