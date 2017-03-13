@@ -3,73 +3,79 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "components_CADContactsAPIMaster_name": {
-            "value": "MiniCADAP"
+            "value": "LoyaltyCADAPI"
         },
          "serverfarms_CADContactsAPIMaster_name": {
-            "value": "MiniCADFarm"
+            "value": "LoyaltyCADFarm"
         },
         "sites_CADContactsAPIMaster_name": {
-            "value": "MiniCADSite"
+            "value": "LoyaltyCADSite"
+        },
+        "virtualMachines_CADSession2016LegacyAPI_name": {
+            "value": "CADLegacy"
         },
         "service_cadapim_name": {
-            "value": "MiniCADAPI"
+            "value": "LoyaltyCADAPI"
         },
         "virtualNetworks_CADVNET_name": {
-            "value": "MiniCADVNETName"
+            "value": "LoyaltyCADVNETName"
         },
         "networkSecurityGroups_CADVM_nsg_name": {
-            "value": "MiniCADNSG"
+            "value": "LoyaltyCADNSG"
         },
         "APIM_Publisher_Email": {
-            "value": "admin@minicad.com"
+            "value": "admin@Loyaltycad.com"
         },
         "APIM_Publisher_Name": {
-            "value": "admin_minicad"
+            "value": "admin_Loyaltycad"
         },
         "sites_MiniCADFunctionApp_name": {
-            "value": "MiniCADFunctionApp"
+            "value": "LoyaltyCADFunctionApp"
         },
        "storageAccounts_functionStorage_name": {
-            "value": "funcstorage"
+            "value": "loyaltycadfuncst"
         },
           "serverfarms_DynamicsFunction_name": {
-            "value": "MiniCADFarm"
+            "value": "LoyaltyCADFarm"
         },
         "virtualMachines_CADLegacyAPI_adminPassword": {
             "value": "MiniCAD123"
         },
+        "virtualMachines_CADLegacyAPI_adminUsername": {
+            "value": "MiniCADAdmin"
+        },
         "networkInterfaces_cadlegacy925_name": {
-            "value": "MiniCADl925"
+            "value": "LoyaltyCADl925"
         },
         "networkInterfaces_ukcadcontactsmasterv798_name": {
-            "value": "MiniCADv798"
+            "value": "LoyaltyCADv798"
         },
         "networkSecurityGroups_CADVM_nsg_name": {
-            "value": "MiniCADNSG"
+            "value": "LoyaltyCADNSG"
         },
         "networkSecurityGroups_UKCADContactsMasterVM_nsg_name": {
-            "value": "MiniCADNSGMaster"
+            "value": "LoyaltyCADNSGMaster"
         },
         "publicIPAddresses_CADLegacyAPI_ip_name": {
-            "value": "MiniCADIPLegacy"
+            "value": "LoyaltyCADIPLegacy"
         },
         "publicIPAddresses_CADVM_ip_name": {
-            "value": "MiniCADIP"
+            "value": "LoyaltyCADIP"
         },
         "publicIPAddresses_UKCADContactsMasterVM_ip_name": {
-            "value": "MiniCADVMIP"
+            "value": "LoyaltyCADVMIP"
         },
         "virtualNetworks_CAD_vnet_name": {
-            "value": "MiniCADVNET"
+            "value": "LoyaltyCADVNET"
         },
         "virtualNetworks_CADVNET_name": {
-            "value": "MiniCADVNETName"
+            "value": "LoyaltyCADVNETName"
         },
         "storageAccounts_caddiag161_name": {
-            "value": "minicaddiag161"
+            "value": "Loyaltycaddiag161"
         },
         "storageAccounts_disks890_name": {
-            "value": "minicadsks890"
+            "value": "Loyaltycadsks890"
         }
     }
 }

@@ -1,6 +1,11 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parametersLink": { 
+        "uri":"https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/parameters.json",
+        "contentVersion":"1.0.0.0"
+    }, 
+    /*
     "parameters": {
         "service_cadapim_name": {
             "defaultValue": "cadsession2016apim",
@@ -23,6 +28,7 @@
            "type": "string"    
         }
     },
+    */
     "variables": {},
     "resources": [
        {
@@ -42,7 +48,8 @@
                 "provisioningState": "Stopped",
                 "targetProvisioningState": "",
                 "createdAtUtc": "2016-12-18T19:47:37.5182495Z",
-                "runtimeUrl": "[concat('https://', parameters('service_cadapim_name'),'.azure-api.net')]",
+                "runtimeUrl": "[concat('https://', concat(parameters('service_cadapim_name'), uniqueString(resourceGroup().id, deployment().name)),'.azure-api.net')]",
+      //          "runtimeUrl": "[concat('https://', parameters('service_cadapim_name'),'.azure-api.net')]",
                 "portalUrl": "[concat('https://', parameters('service_cadapim_name'),'.portal.azure-api.net')]",
                 "managementApiUrl": "[concat('https://', parameters('service_cadapim_name'),'.management.azure-api.net')]",
                 "scmUrl": "[concat('https://', parameters('service_cadapim_name'),'.scm.azure-api.net')]",
@@ -50,8 +57,9 @@
                 "hostnameConfigurations": [],
                 "staticIPs": [],
                 "additionalLocations": null,
-                "vpnconfiguration": {
-                    "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADVNET_name')), '/subnets/internal')]",
+                "vpnconfiguration": {        
+             //       "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADVNET_name')), '/subnets/internal')]",
+                    "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', concat(parameters('virtualNetworks_CADVNET_name'), uniqueString(resourceGroup().id, deployment().name))), '/subnets/internal')]",
                     "location": "North Europe"
                 },
                 "customProperties": null,
@@ -59,13 +67,15 @@
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADVNET_name'))]"
+           //     "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_CADVNET_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', concat(parameters('virtualNetworks_CADVNET_name'), uniqueString(resourceGroup().id, deployment().name)))]"
             ]
         },
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/networkSecurityGroups/CADSession2016VM-nsg'.",
             "type": "Microsoft.Network/networkSecurityGroups",
-            "name": "[parameters('networkSecurityGroups_CADVM_nsg_name')]",
+       //     "name": "[parameters('networkSecurityGroups_CADVM_nsg_name')]",
+            "name": "[concat(parameters('networkSecurityGroups_CADVM_nsg_name'), uniqueString(resourceGroup().id, deployment().name))]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -104,7 +114,8 @@
         {
             "comments": "Generalized from resource: '/subscriptions/3e10efc9-6c53-4b62-b561-a1b7f61c4a4f/resourceGroups/CADSession2016/providers/Microsoft.Network/virtualNetworks/CADSession2016VNET'.",
             "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetworks_CADVNET_name')]",
+            "name": "[concat(parameters('virtualNetworks_CADVNET_name'), uniqueString(resourceGroup().id, deployment().name)))]",
+ //            "name": "[parameters('virtualNetworks_CADVNET_name')]",
             "apiVersion": "2016-03-30",
             "location": "northeurope",
             "properties": {
@@ -125,7 +136,8 @@
                         "properties": {
                             "addressPrefix": "10.1.1.0/24",
                             "networkSecurityGroup": {
-                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADVM_nsg_name'))]"
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', concat(parameters('networkSecurityGroups_CADVM_nsg_name'), uniqueString(resourceGroup().id, deployment().name)))]"
+                            //     "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADVM_nsg_name'))]"
                             }
                         }
                     }
@@ -133,7 +145,8 @@
             },
             "resources": [],
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADVM_nsg_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', concat(parameters('networkSecurityGroups_CADVM_nsg_name'), uniqueString(resourceGroup().id, deployment().name)))]"
+                //        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_CADVM_nsg_name'))]"
             ]
         }
     ]

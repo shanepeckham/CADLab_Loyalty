@@ -1,0 +1,121 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "deploymentName": {
+      "type": "string"
+    },
+    "resourceGroup": {
+      "type": "string"  
+    }
+    /*
+    "adminPassword": {
+      "type": "securestring"
+    },
+    "domainFqdn": {
+      "type": "string"
+    }
+    */
+  },
+  "variables": {
+ //   "template": {
+ //     "base": "https://github.com/shanepeckham/CADHackathon_Loyalty/blob/SingleDeploy/parameters.json"
+ //     "nested1": "shared1.json",
+  //    "nested2": "shared2.json"
+  //  },
+    "Shared": {
+      "deploymentName": "[parameters('deploymentName')]",
+      "resourceGroup": "[parameters('resourceGroup')]"
+    }
+  },
+  "resources": [
+    {
+      "name": "VMandNetwork",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-06-15",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/templateVM.json",
+          "contentVersion": "1.0.0.0"
+        },
+       "parameters": {
+        "virtualMachines_CADLegacyAPI_adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+           "virtualMachines_CADSession2016LegacyAPI_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+           "networkInterfaces_cadlegacy925_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+            "networkInterfaces_ukcadcontactsmasterv798_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "networkSecurityGroups_CADVM_nsg_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "networkSecurityGroups_UKCADContactsMasterVM_nsg_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "publicIPAddresses_CADLegacyAPI_ip_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "publicIPAddresses_CADVM_ip_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "publicIPAddresses_UKCADContactsMasterVM_ip_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "virtualNetworks_CAD_vnet_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "virtualNetworks_CADVNET_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+         "storageAccounts_caddiag161_name": {
+            "defaultValue": null,
+            "type": "String"
+        },
+        "storageAccounts_disks890_name": {
+            "defaultValue": null,
+            "type": "String"
+        }
+        }
+      }
+    } /*
+    {
+      "name": "[variables('template').nested2]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "[variables('apiVersion').resources.deployments]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('template').base, 'nested/', variables('template').nested2)]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "apiVersion": {
+            "value": "[variables('apiVersion')]"
+          },
+          "shared": {
+            "value": "[variables('shared')]"
+          }
+        }
+      }
+    } */
+  ],
+  "outputs": {
+  }
+}
