@@ -7,15 +7,15 @@
             "type": "string"
         },
          "sites_MiniCADFunctionApp_name": {
-            "defaultValue": "",
+            "defaultValue": "CADFunction",
             "type": "string"
         },
         "storageAccounts_functionStorage_name": {
-              "defaultValue": "",
+              "defaultValue": "cadfuncstor",
             "type": "string"
         },
         "serverfarms_DynamicsFunction_name": {
-            "defaultValue": "",
+            "defaultValue": "CADFunctionPlan",
             "type": "string"
         },
         "repoURL": {
