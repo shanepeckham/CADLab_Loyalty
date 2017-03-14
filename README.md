@@ -28,7 +28,7 @@ The following technology components are used in this solution:
 *	Ubuntu with a custom extension template to rapidly provision and deploy a custom image with an running solution (IaaS)
 *	Azure networking to isolate legacy workloads (IaaS)
 *	API Management to govern APIs and to bridge publicly accessible APIs with isolated APIs (SaaS) (IaaS)
-*	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens and Katrien de Graeve](https://github.com/xstof/Quiz) 
+*	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens and Katrien de Graeve for the generate coupon function](https://github.com/xstof/Quiz) 
 *	Azure logic apps to provide serverless integration that is accessible to non-developers (Serveless)
 *	Azure Resource Manager templates to automate the provisioning and inflation of a full environment
 *	The Azure CLI 2.0
@@ -53,10 +53,10 @@ For this Hackathon you will require:
 
 ## 1. Provisioning the components: Select Deploy to Azure to deploy to your Azure instance that you are currently logged in to.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-oms-extension-ubuntu-vm%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fshanepeckham%2FCADHackathon_Loyalty%2Fmaster%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-oms-extension-ubuntu-vm%2Fazuredeploy.json" target="_blank">
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fshanepeckham%2FCADHackathon_Loyaltys%2Fmaster%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
