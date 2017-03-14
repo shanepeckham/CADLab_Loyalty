@@ -194,6 +194,14 @@ You can test the API now and it should return values with a status of 200 Ok.
 
 We have now set up the legacy Ticket API in our process.
 
+## 6. Import Function Storage hooks
+
+Click on the Deploy button below.
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2Fshanepeckham%2FCADHackathon_Loyalty%2Fblob%2Fmaster%2F%2Fazuredeployfunctionsettings.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+
 
 # The Logic App solution
 
