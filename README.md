@@ -90,6 +90,6 @@ You will need to navigate to the code view to be able to select the json fields 
 
 ```
 Now add a For Each loop as we want to iterate through the resultset, so select the Body as the output from your previous request.
-
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ForEach.jpg)
 
 
