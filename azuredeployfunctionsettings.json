@@ -1,0 +1,134 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+         "deploymentName": {
+            "defaultValue": "Loyalty",
+            "type": "string"
+        },
+         "sites_MiniCADFunctionApp_name": {
+            "defaultValue": "",
+            "type": "string"
+        },
+        "storageAccounts_functionStorage_name": {
+              "defaultValue": "",
+            "type": "string"
+        },
+        "serverfarms_DynamicsFunction_name": {
+            "defaultValue": "",
+            "type": "string"
+        },
+        "repoURL": {
+            "type": "string",
+            "defaultValue": "https://github.com/shanepeckham/CADCouponFunction.git",
+            "metadata": {
+                "description": "The URL for the GitHub repository that contains the project to deploy."
+            }
+        },
+        "branch": {
+            "type": "string",
+            "defaultValue": "master",
+            "metadata": {
+                "description": "The branch of the GitHub repository to use."
+            }
+        }
+    },
+    "variables": {
+        "sites_MiniCADFunctionApp_name":  "[concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(parameters('deploymentName')))]",
+            "storageAccounts_functionStorage_name": "[concat(parameters('storageAccounts_functionStorage_name'), uniqueString(parameters('deploymentName')))]",
+            "serverfarms_DynamicsFunction_name": "[concat(parameters('serverfarms_DynamicsFunction_name'), uniqueString(parameters('deploymentName')))]"
+    },
+    "resources": [
+    {
+            "comments": "",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic",
+                "size": "Y1",
+                "family": "Y",
+                "capacity": 0
+            },
+            "kind": "functionapp",
+            "name": "[variables('serverfarms_DynamicsFunction_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "properties": {
+               "name": "[variables('serverfarms_DynamicsFunction_name')]",  
+                "numberOfWorkers": 0
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[variables('storageAccounts_functionStorage_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "northeurope",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[variables('sites_MiniCADFunctionApp_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "tags": {
+            },
+            "properties": {
+                "name": "[variables('sites_MiniCADFunctionApp_name')]",
+                "hostNames": [
+                     "[concat(variables('sites_MiniCADFunctionApp_name'), '.azurewebsites.net')]"
+                ],
+                "enabledHostNames": [
+                    "[concat(variables('sites_MiniCADFunctionApp_name'), '.azurewebsites.net')]",
+                    "[concat(variables('sites_MiniCADFunctionApp_name'), '.scm.azurewebsites.net')]"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(variables('sites_MiniCADFunctionApp_name'), '.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(variables('sites_MiniCADFunctionApp_name'), '.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_DynamicsFunction_name'))]"
+            },
+            "resources": [
+                                {
+                    "apiVersion": "2015-08-01",
+                    "name": "appsettings",
+                    "type": "config",
+                    "dependsOn": [
+                         "[resourceId('Microsoft.Web/Sites', variables('sites_MiniCADFunctionApp_name'))]",
+                         "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name'))]"
+                    ],
+                    "properties": {
+                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccounts_functionStorage_name'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name')), '2015-05-01-preview').key1,';')]", 
+                        "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccounts_functionStorage_name'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name')), '2015-05-01-preview').key1,';')]", 
+                        "FUNCTIONS_EXTENSION_VERSION": "latest"
+                    }
+                } 
+                ],
+            "dependsOn": [
+               "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_DynamicsFunction_name'))]"
+            ]
+        }
+   ]
+}
