@@ -94,6 +94,10 @@ Navigate to API Management component provisioned within Azure, its name will be 
 
 Click on the overview blade and select 'Publisher Portal' (note we will use the old portal while the new portal is still in preview), see below:
 
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/APIMPublisherPortal.jpg)
+
+This will navigate you to the Publisher portal, select Import API, see below:
+
 
 
 
