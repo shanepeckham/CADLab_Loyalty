@@ -169,5 +169,24 @@ With the following in code view:
 
 Now you can call the GenerateCoupon function if the condition is met, pass in the name of the user that you want to generate the digital coupon for:
 
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/IfCondition.jpg)
+
+With the following in the code view:
+```
+"GenerateCoupon": {
+                                "inputs": {
+                                    "body": {
+                                        "name": "@item()?['name']"
+                                    },
+                                    "function": {
+                                        "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/[Your Resource Group]/providers/Microsoft.Web/sites/MiniCADFunctionApp4pb56ec3fmsgg/functions/GenerateCoupon"
+                                    },
+                                    "method": "POST"
+                                },
+                                "runAfter": {},
+                                "type": "Function"
+                            }
+```
+
 
 
