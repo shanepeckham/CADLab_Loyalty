@@ -202,6 +202,7 @@ Click on the Deploy button below.
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
+NB - Make sure you use the same Deployment Name as you did in Step 1.
 
 # The Logic App solution
 
