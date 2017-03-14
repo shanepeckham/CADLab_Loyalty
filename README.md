@@ -93,8 +93,32 @@ Now add a For Each loop as we want to iterate through the resultset, so select t
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ForEach.jpg)
 
-Now you want to add a step to query the Legacy CRM API which is inside the isolated network, add an API Management API step and once again query the Id, which in this case is the casenum output from the previous step and add the API Management subscription key.
+Now you want to add a step to query the Legacy Ticket API which is inside the isolated network, add an API Management API step and once again query the Id, which in this case is the casenum output from the previous step and add the API Management subscription key.
 
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/QueryCasesFeedback.jpg)
+
+Here is what your code view should look like:
+```
+"Query_Cases_Feedback": {
+                        "inputs": {
+                            "api": {
+                                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/[Your Resource Group]/providers/Microsoft.ApiManagement/service/minicad123api/apis/58af3fded9e0430e784c6b9d"
+                            },
+                            "method": "get",
+                            "pathTemplate": {
+                                "parameters": {
+                                    "id": "@{encodeURIComponent(item()?['caseNum'])}"
+                                },
+                                "template": "/LegacyAPI/contacts/{id}"
+                            },
+                            "subscriptionKey": "@{encodeURIComponent(triggerBody()['APIMKey'])}"
+                        },
+                        "runAfter": {},
+                        "type": "ApiManagement"
+                    },
+```
+
+Now we want to add our Cognitive Services 'Detect Sentiment' step so that we can analyse the sentiment of the Ticket Feedback, your step should look like this:
 
 
 
