@@ -47,6 +47,7 @@ For this Hackathon you will require:
 * A cognitive services trial account key, get it here - https://www.microsoft.com/cognitive-services/en-us/sign-up
 * A Gmail account for sending emails, get it here - https://accounts.google.com/SignUp?service=mail&continue=http%3A%2F%2Fmail.google.com%2Fmail%2Fe-11-14a952576b5f2ffe90ec0dd9823744e0-46a962fbb7947b68059374ddde7f29b5490a6b4d
 * Install Postman, get it here - https://www.getpostman.com
+* If using Windows 10 get Bash for Windows - https://blogs.windows.com/buildingapps/2016/03/30/run-bash-on-ubuntu-on-windows/ or putty if on an older version - http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
 
 # How to install the solution
 
@@ -127,6 +128,29 @@ This will take you to the test harness of API Management. Click the eyeball and 
 You can test the API now and it should return values with a status of 200 Ok.
 
 We have now set up the first API in our process.
+
+4. Install the legacy Ticket API on the VM
+
+At the time of writing custom script extensions do not work in ARM templates so we will manually connect to the machine and run the build script.
+
+Navigate to your VM, the default name will be CADLegacyAPI[hash] and navigate to the Overview blade and copy the value in the field Public IP Address/DNS label, see below:
+
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/VMIP.jpg)
+
+We will now ssh onto the machine using Bash for Windows on Windows 10, or putty or just plain old terminal on a mac or Linux.
+
+* Type ssh MiniCADAdmin@[pasted ip address - without value '/none' on the end) e.g. ssh MiniCADAdmin@12.34.56.78 and press enter - see below:
+
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ssh2.jpg)
+
+* Select yes to the message "Are you sure you want to continue connecting"
+* Type in password MiniCADAdmin123 - note this is hardcoded in the deploy
+* Paste the following in the command line: ``` git clone https://github.com/shanepeckham/CADHackathon_Loyalty.git ```
+* Now type ``` cd CADHackathon_Loyalty ```
+* Now type ``` sh installVM.sh ```
+* Enter 'Y' to any prompts - this will take around a minute
+* You will now be presented with the configuring MySQL-server screen. Enter the MySQL password here as MiniCAD123. You will need to do this twice and ensure you enter it correctly. The install will continue - see below:
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/mysqlroot.jpg)
 
 
 
