@@ -1,0 +1,593 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+         "deploymentName": {
+            "defaultValue": "Loyalty",
+            "type": "string"
+        },
+        "virtualMachines_CADLegacyAPI_adminPassword": {
+            "defaultValue": "MiniCADAdmin123",
+            "type": "securestring"
+        },
+           "virtualMachines_LegacyVMAPI_name": {
+            "defaultValue": "CADLegacyAPI",
+            "type": "string"
+        },
+           "networkInterfaces_cadlegacy925_name": {
+            "defaultValue": "cadlegacy925",
+            "type": "string"
+        },
+            "networkInterfaces_ukcadcontactsmasterv798_name": {
+            "defaultValue": "cad798",
+            "type": "string"
+        },
+        "networkSecurityGroups_CADVM_nsg_name": {
+            "defaultValue": "CADVM-nsg",
+            "type": "string"
+        },
+        "networkSecurityGroups_UKCADContactsMasterVM_nsg_name": {
+            "defaultValue": "CADMasterVM-nsg",
+            "type": "string"
+        },
+        "publicIPAddresses_CADLegacyAPI_ip_name": {
+            "defaultValue": "CADLegacyAPI-ip",
+            "type": "string"
+        },
+        "publicIPAddresses_CADVM_ip_name": {
+            "defaultValue": "CADVM-ip",
+            "type": "string"
+        },
+        "publicIPAddresses_UKCADContactsMasterVM_ip_name": {
+            "defaultValue": "CADMasterVM-ip",
+            "type": "string"
+        },
+        "virtualNetworks_CAD_vnet_name": {
+            "defaultValue": "CAD-vnet",
+            "type": "string"
+        },
+        "virtualNetworks_CADVNET_name": {
+            "defaultValue": "CADVNET",
+            "type": "string"
+        },
+         "storageAccounts_caddiag161_name": {
+            "defaultValue": "caddiag161",
+            "type": "string"
+        },
+        "storageAccounts_disks890_name": {
+            "defaultValue": "caddisks890",
+            "type": "string"
+        },
+            "service_cadapim_name": {
+            "defaultValue": "cadapim",
+            "type": "string"
+        },
+           "APIM_Publisher_Email": {
+           "defaultValue": "test@test.com",
+           "type": "string"    
+        },
+           "APIM_Publisher_Name": {
+           "defaultValue": "test",
+           "type": "string"
+           },
+        "components_CADContactsAPIMaster_name": {
+            "defaultValue": "CADAPIMaster",
+            "type": "string"
+        },
+        "serverfarms_CADContactsAPIMaster_name": {
+            "defaultValue": "CADAPIMasterplan",
+            "type": "string"
+        },
+        "repoURL": {
+            "type": "string",
+            "defaultValue": "https://github.com/shanepeckham/CADContacts.git",
+            "metadata": {
+                "description": "The URL for the GitHub repository that contains the project to deploy."
+            }
+        },
+        "branch": {
+            "type": "string",
+            "defaultValue": "master",
+            "metadata": {
+                "description": "The branch of the GitHub repository to use."
+            }
+        },
+        "sites_CADContactsAPIMaster_name": {
+            "defaultValue": "CADAPIMastersite",
+            "type": "string"
+        },
+        "sites_MiniCADFunctionApp_name": {
+            "defaultValue": "CADFunction",
+            "type": "string"
+        },
+        "storageAccounts_functionStorage_name": {
+              "defaultValue": "cadfuncstor",
+            "type": "string"
+        },
+        "serverfarms_DynamicsFunction_name": {
+            "defaultValue": "CADFunctionPlan",
+            "type": "string"
+        },
+        "function_repoURL": {
+            "type": "string",
+            "defaultValue": "https://github.com/shanepeckham/CADCouponFunction.git",
+            "metadata": {
+                "description": "The URL for the GitHub repository that contains the project to deploy."
+            }
+        },
+        "function_branch": {
+            "type": "string",
+            "defaultValue": "master",
+            "metadata": {
+                "description": "The branch of the GitHub repository to use."
+            }
+        }
+    },
+    "variables": {
+           "virtualMachines_LegacyVMAPI_name": "[concat(parameters('virtualMachines_LegacyVMAPI_name'), uniqueString(parameters('deploymentName')))]",
+           "networkInterfaces_cadlegacy925_name": "[concat(parameters('networkInterfaces_cadlegacy925_name'), uniqueString(parameters('deploymentName')))]",
+            "networkInterfaces_ukcadcontactsmasterv798_name": "[concat(parameters('networkInterfaces_ukcadcontactsmasterv798_name'), uniqueString(parameters('deploymentName')))]",
+            "networkSecurityGroups_CADVM_nsg_name": "[concat(parameters('networkSecurityGroups_CADVM_nsg_name'), uniqueString(parameters('deploymentName')))]",
+            "networkSecurityGroups_UKCADContactsMasterVM_nsg_name": "[concat(parameters('networkSecurityGroups_UKCADContactsMasterVM_nsg_name'), uniqueString(parameters('deploymentName')))]",
+            "publicIPAddresses_CADLegacyAPI_ip_name": "[concat(parameters('publicIPAddresses_CADLegacyAPI_ip_name'), uniqueString(parameters('deploymentName')))]",
+            "publicIPAddresses_CADVM_ip_name": "[concat(parameters('publicIPAddresses_CADVM_ip_name'), uniqueString(parameters('deploymentName')))]",
+            "publicIPAddresses_UKCADContactsMasterVM_ip_name": "[concat(parameters('publicIPAddresses_UKCADContactsMasterVM_ip_name'), uniqueString(parameters('deploymentName')))]",
+            "virtualNetworks_CAD_vnet_name": "[concat(parameters('virtualNetworks_CAD_vnet_name'), uniqueString(parameters('deploymentName')))]",
+            "virtualNetworks_CADVNET_name": "[concat(parameters('virtualNetworks_CADVNET_name'), uniqueString(parameters('deploymentName')))]",
+            "storageAccounts_caddiag161_name": "[concat(parameters('storageAccounts_caddiag161_name'), uniqueString(parameters('deploymentName')))]",
+            "storageAccounts_disks890_name": "[concat(parameters('storageAccounts_disks890_name'), uniqueString(parameters('deploymentName')))]",
+            "service_cadapim_name": "[concat(parameters('service_cadapim_name'), uniqueString(parameters('deploymentName')))]",  
+            "components_CADContactsAPIMaster_name": "[concat(parameters('components_CADContactsAPIMaster_name'), uniqueString(parameters('deploymentName')))]",
+            "sites_CADContactsAPIMaster_name": "[concat(parameters('sites_CADContactsAPIMaster_name'), uniqueString(parameters('deploymentName')))]",
+            "serverfarms_CADContactsAPIMaster_name": "[concat(parameters('serverfarms_CADContactsAPIMaster_name'), uniqueString(parameters('deploymentName')))]",
+            "sites_MiniCADFunctionApp_name":  "[concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(parameters('deploymentName')))]",
+            "storageAccounts_functionStorage_name": "[concat(parameters('storageAccounts_functionStorage_name'), uniqueString(parameters('deploymentName')))]",
+            "serverfarms_DynamicsFunction_name": "[concat(parameters('serverfarms_DynamicsFunction_name'), uniqueString(parameters('deploymentName')))]"
+    },
+    "resources": [
+        {
+            "comments": "",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[variables('virtualMachines_LegacyVMAPI_name')]",
+            "apiVersion": "2015-06-15",
+            "location": "northeurope",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_DS1_v2"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "16.04.0-LTS",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[variables('virtualMachines_LegacyVMAPI_name')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https', '://', variables('storageAccounts_disks890_name'), '.blob.core.windows.net', concat('/vhds/', variables('virtualMachines_LegacyVMAPI_name'),'20161220143326.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[variables('virtualMachines_LegacyVMAPI_name')]",
+                    "adminUsername": "MiniCADAdmin",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('virtualMachines_CADLegacyAPI_adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaces_cadlegacy925_name'))]"
+                        }
+                    ]
+                }
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_disks890_name'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaces_cadlegacy925_name'))]"
+            ]
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "name": "[variables('networkSecurityGroups_CADVM_nsg_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-ssh",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "22",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1000,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "node_in",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "8000",
+                            "sourceAddressPrefix": "10.1.0.0/24",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 1010,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[variables('networkInterfaces_cadlegacy925_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "10.1.1.4",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddresses_CADLegacyAPI_ip_name'))]"
+                            },
+                            "subnet": {
+                                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_CADVNET_name')), '/subnets/internalnetwork')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddresses_CADLegacyAPI_ip_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_CADVNET_name'))]"
+            ]
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('publicIPAddresses_CADLegacyAPI_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[variables('publicIPAddresses_CADVM_ip_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[variables('virtualNetworks_CAD_vnet_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/24"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "default",
+                        "properties": {
+                            "addressPrefix": "10.0.0.0/24"
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[variables('virtualNetworks_CADVNET_name')]",
+            "apiVersion": "2016-03-30",
+            "location": "northeurope",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.1.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "internal",
+                        "properties": {
+                            "addressPrefix": "10.1.0.0/24"
+                        }
+                    },
+                    {
+                        "name": "internalnetwork",
+                        "properties": {
+                            "addressPrefix": "10.1.1.0/24",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_CADVM_nsg_name'))]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroups_CADVM_nsg_name'))]"
+            ]
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[variables('storageAccounts_caddiag161_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "northeurope",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Premium_LRS",
+                "tier": "Premium"
+            },
+            "kind": "Storage",
+            "name": "[variables('storageAccounts_disks890_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "northeurope",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.ApiManagement/service",
+            "sku": {
+                "name": "Developer",
+                "capacity": 1
+            },
+            "name": "[variables('service_cadapim_name')]",
+            "apiVersion": "2016-07-07",
+            "location": "North Europe",
+            "tags": {},
+            "properties": {
+                "publisherEmail": "[parameters('APIM_Publisher_Email')]",
+                "publisherName": "[parameters('APIM_Publisher_Name')]",
+                "provisioningState": "Stopped",
+                "targetProvisioningState": "",
+                "createdAtUtc": "2016-12-18T19:47:37.5182495Z",
+                "runtimeUrl": "[concat('https://', variables('service_cadapim_name'),'.azure-api.net')]",
+                "portalUrl": "[concat('https://', variables('service_cadapim_name'),'.portal.azure-api.net')]",
+                "managementApiUrl": "[concat('https://', variables('service_cadapim_name'),'.management.azure-api.net')]",
+                "scmUrl": "[concat('https://', variables('service_cadapim_name'),'.scm.azure-api.net')]",
+                "addresserEmail": null,
+                "hostnameConfigurations": [],
+                "staticIPs": [],
+                "additionalLocations": null,
+                "vpnconfiguration": {
+                    "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_CADVNET_name')), '/subnets/internal')]",
+                    "location": "North Europe"
+                },
+                "customProperties": null,
+                "vpnType": 1
+            },
+            "resources": [],
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_CADVNET_name'))]"
+            ]
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "S1",
+                "tier": "Standard",
+                "size": "S1",
+                "family": "S",
+                "capacity": 0
+            },
+            "kind": "app",
+            "name": "[variables('serverfarms_CADContactsAPIMaster_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "properties": {
+             "name": "[variables('serverfarms_CADContactsAPIMaster_name')]",
+                "numberOfWorkers": 0
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Web/sites",
+            "kind": "api",
+            "name": "[variables('sites_CADContactsAPIMaster_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "tags": {
+            },
+            "properties": {
+                "name": "[variables('sites_CADContactsAPIMaster_name')]",
+                "hostNames": [
+                      "[concat(variables('sites_CADContactsAPIMaster_name'), '.azurewebsites.net')]"
+                ],
+                "enabledHostNames": [
+                     "[concat(variables('sites_CADContactsAPIMaster_name'), '.azurewebsites.net')]",
+                     "[concat(variables('sites_CADContactsAPIMaster_name'), '.scm.azurewebsites.net')]"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(variables('sites_CADContactsAPIMaster_name'), '.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(variables('sites_CADContactsAPIMaster_name'), '.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+               "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_CADContactsAPIMaster_name'))]"
+            },
+            "resources": [
+                {
+                "apiVersion": "2015-08-01",
+                "name": "web",
+                "type": "sourcecontrols",
+                "dependsOn": [
+                    "[resourceId('Microsoft.Web/Sites', variables('sites_CADContactsAPIMaster_name'))]"
+                ],
+                "properties": {
+                    "RepoUrl": "[parameters('repoURL')]",
+                    "branch": "[parameters('branch')]",
+                    "IsManualIntegration": true
+                    }
+                }
+            ],
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_CADContactsAPIMaster_name'))]"
+            ]
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Web/serverfarms",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic",
+                "size": "Y1",
+                "family": "Y",
+                "capacity": 0
+            },
+            "kind": "functionapp",
+            "name": "[variables('serverfarms_DynamicsFunction_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "properties": {
+               "name": "[variables('serverfarms_DynamicsFunction_name')]",  
+                "numberOfWorkers": 0
+            },
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Storage/storageAccounts",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "name": "[variables('storageAccounts_functionStorage_name')]",
+            "apiVersion": "2016-01-01",
+            "location": "northeurope",
+            "tags": {},
+            "properties": {},
+            "resources": [],
+            "dependsOn": []
+        },
+        {
+            "comments": "",
+            "type": "Microsoft.Web/sites",
+            "kind": "functionapp",
+            "name": "[variables('sites_MiniCADFunctionApp_name')]",
+            "apiVersion": "2015-08-01",
+            "location": "North Europe",
+            "tags": {
+            },
+            "properties": {
+                "name": "[variables('sites_MiniCADFunctionApp_name')]",
+                "hostNames": [
+                     "[concat(variables('sites_MiniCADFunctionApp_name'), '.azurewebsites.net')]"
+                ],
+                "enabledHostNames": [
+                    "[concat(variables('sites_MiniCADFunctionApp_name'), '.azurewebsites.net')]",
+                    "[concat(variables('sites_MiniCADFunctionApp_name'), '.scm.azurewebsites.net')]"
+                ],
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(variables('sites_MiniCADFunctionApp_name'), '.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    },
+                    {
+                        "name": "[concat(variables('sites_MiniCADFunctionApp_name'), '.scm.azurewebsites.net')]",
+                        "sslState": 0,
+                        "thumbprint": null,
+                        "ipBasedSslState": 0
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_DynamicsFunction_name'))]"
+            },
+            "resources": [
+                {
+                    "apiVersion": "2015-08-01",
+                    "name": "web",
+                    "type": "sourcecontrols",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', variables('sites_MiniCADFunctionApp_name'))]",
+                        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name'))]"
+                ],
+                "properties": {
+                    "RepoUrl": "[parameters('function_repoURL')]",
+                    "branch": "[parameters('function_branch')]",
+                    "IsManualIntegration": true,
+                     "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccounts_functionStorage_name'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name')), '2015-05-01-preview').key1,';')]", 
+                     "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccounts_functionStorage_name'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name')), '2015-05-01-preview').key1,';')]", 
+                     "FUNCTIONS_EXTENSION_VERSION": "latest"
+                    }
+                }
+                ],
+            "dependsOn": [
+               "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_DynamicsFunction_name'))]"
+            ]
+        }
+    ]
+}
