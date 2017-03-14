@@ -34,7 +34,7 @@
         }
     },
     "variables": {
-        "sites_MiniCADFunctionApp_name":  "[concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(parameters('deploymentName')))]",
+            "sites_MiniCADFunctionApp_name":  "[concat(parameters('sites_MiniCADFunctionApp_name'), uniqueString(parameters('deploymentName')))]",
             "storageAccounts_functionStorage_name": "[concat(parameters('storageAccounts_functionStorage_name'), uniqueString(parameters('deploymentName')))]",
             "serverfarms_DynamicsFunction_name": "[concat(parameters('serverfarms_DynamicsFunction_name'), uniqueString(parameters('deploymentName')))]"
     },
