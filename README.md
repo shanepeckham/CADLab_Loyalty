@@ -1,3 +1,5 @@
+# *Customer Loyalty Hackathon*
+
 # What is it?
 
 This repository will provision an environment that may be used as a Hackathon to build an end to end scenario that does the following:
