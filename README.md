@@ -42,13 +42,36 @@ The following technology components are used in this solution:
 
 This solution will install and configure all of the components required to build the end to end Loyalty scenario. The Hackathon attendees just need to wire everything together in a Logic App. 
 
-# Preparing environment
+# Preparing for the solution
 
 For this Hackathon you will require:
 * A cognitive services trial account key, get it here - https://www.microsoft.com/cognitive-services/en-us/sign-up
 * A Gmail account for sending emails, get it here - https://accounts.google.com/SignUp?service=mail&continue=http%3A%2F%2Fmail.google.com%2Fmail%2Fe-11-14a952576b5f2ffe90ec0dd9823744e0-46a962fbb7947b68059374ddde7f29b5490a6b4d
 * Install Postman, get it here - https://www.getpostman.com
 
+# How to install the solution
+
+1. <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-oms-extension-ubuntu-vm%2Fazuredeploy.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-oms-extension-ubuntu-vm%2Fazuredeploy.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
+
+The only parameter you need to change is the Deployment Name - give it any name as it will be used to generate a hash to ensure your site names are unique, see the image below:
+
+
+
+This will take roughly 30 minutes as this will provision:
+
+* Two VNETs
+* An Ubuntu VM and place in inside the VNET isolated with NSGs
+* An API Management instance (Developer Tier) and place it inside a subnet within the VNET
+* An App Service API app and deploy a node.js Swagger enabled API to it
+* An App Service serverless function with dynamic scaling and pricing
+* Storage accounts to house the VM VHD, the Function logging and the App Service API logging
+
+2. Once deployment is complete, navigate to your 
 
 # The Logic App solution
 
