@@ -12,7 +12,11 @@ This repository will provision an environment that may be used as a Hackathon to
 
 This solution brings together Infrastructure as a Service (IaaS), Platform as a Service (PaaS), Software as a Service (SaaS) and Serverless components on Microsoft Azure to build a realistic end to end scenario common in retail. Furthermore, the democratization of AI is tied in nicely by incorporating Cognitive Services to perform text analysis and determine the sentiment of a customer’s feedback.
 
-The solution aims to show the following:
+# The end to end scenario
+
+This solution will query a customer datastore, then get the last support case associated with a customer from a different datastore, check the sentiment/satisfaction of the customer's last feedback and generate a digital discount coupon for them if their sentiment is determined to be dissatisfied. The coupon will then be emailed to the customer to redeem. 
+
+# The solution aims to show the following:
 
 *	How legacy lift and shift applications on IaaS can be incorporated into modern solutions to quickly derive value from higher value services in the cloud.
 *	How existing investments can be modernized without having to rebuild everything to drive customer value
