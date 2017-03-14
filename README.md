@@ -75,6 +75,17 @@ This will take roughly 30 minutes as this will provision:
 
 2. Once deployment is complete, navigate to your App Service API App, its default name will be CADAPIMasterSite[hash] and click on the URI in the overview blade, see below:
 
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/API%20URI.jpg)
+
+This will navigate you to a URL that will display the following message if it was provisioned correctly:
+```
+Cannot GET / 
+```
+Now type ``` /docs ``` after the azurewebsites.net part of the url and you should see the Swagger editor open with a test harness to test the API:
+
+
+
+
 
 
 # The Logic App solution
