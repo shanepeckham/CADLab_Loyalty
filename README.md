@@ -98,6 +98,22 @@ Click on the overview blade and select 'Publisher Portal' (note we will use the 
 
 This will navigate you to the Publisher portal, select Import API, see below:
 
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ImportAPI.jpg)
+
+Now enter the following values:
+
+* Select "From Url"
+* Paste your API URL from step 2 and add ``` /swagger ``` on the end e.g. http://cadapimastersitervhyzok7zv4gw.azurewebsites.net/swagger
+* Select "Swagger" as the specification format
+* Select New API
+* Type "Contacts" into the Web API URL Suffix field
+* Click Products and select "Unlimited"
+* Click Save
+
+See below:
+
+
+You will now have imported an API that will now be accessible from the API Gateway. 
 
 
 
