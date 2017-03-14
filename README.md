@@ -29,7 +29,7 @@ The following technology components are used in this solution:
 *	Ubuntu with a custom extension template to rapidly provision and deploy a custom image with an running solution (IaaS)
 *	Azure networking to isolate legacy workloads (IaaS)
 *	API Management to govern APIs and to bridge publicly accessible APIs with isolated APIs (SaaS) (IaaS)
-*	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens and Katrien de Grave](https://github.com/xstof/Quiz) 
+*	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens and Katrien de Graeve](https://github.com/xstof/Quiz) 
 *	Azure logic apps to provide serverless integration that is accessible to non-developers (Serveless)
 *	Azure Resource Manager templates to automate the provisioning and inflation of a full environment
 *	The Azure CLI 2.0
@@ -131,10 +131,10 @@ Your code view should look like this:
                             },
                             "host": {
                                 "api": {
-                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/cognitiveservicestextanalytics"
+                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/[YourCognitiveServicesConnectionName]"
                                 },
                                 "connection": {
-                                    "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                                    "name": "@parameters('$connections')[YourCognitiveServicesConnectionName]['connectionId']"
                                 }
                             },
                             "method": "post",
@@ -151,6 +151,23 @@ Your code view should look like this:
 
 Now we want to add a condition to check the sentiment, if the probability outcome is less than 0.5, then it negative sentiment and therefore qualifies for our discount coupon.
 
+Your condition should look like this:
+
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/Condition.jpg)
+
+With the following in code view:
+```
+"expression": "@less(body('Detect_Sentiment')?['score'], 0.5)",
+                        "runAfter": {
+                            "Detect_Sentiment": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+
+```
+
+Now you can call the GenerateCoupon function if the condition is met, pass in the name of the user that you want to generate the digital coupon for:
 
 
 
