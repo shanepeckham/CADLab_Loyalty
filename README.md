@@ -114,7 +114,21 @@ See below:
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ImportAPIDetails.jpg)
 
-You will now have imported an API that will now be accessible from the API Gateway. You can test it by clicking on Developer Portal.
+You will now have imported an API that will now be accessible from the API Gateway. You can test it by clicking on Developer Portal, see below:
+
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DeveloperPortal.jpg)
+
+Click APIs --> Contact List API --> Try It
+
+This will take you to the test harness of API Management. Click the eyeball and copy the value in the field Ocp-Apim-Subscription-Key, this is your APIMKey which we will use extensively, see below:
+
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/APIMKey.jpg)
+
+You can test the API now and it should return values with a status of 200 Ok.
+
+We have now set up the first API in our process.
+
+
 
 
 
