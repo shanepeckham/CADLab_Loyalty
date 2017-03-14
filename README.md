@@ -51,7 +51,9 @@ For this Hackathon you will require:
 
 # How to install the solution
 
-1. <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-oms-extension-ubuntu-vm%2Fazuredeploy.json" target="_blank">
+1. Select Deploy to Azure to deploy to your Azure instance that you are currently logged in to.
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-oms-extension-ubuntu-vm%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-oms-extension-ubuntu-vm%2Fazuredeploy.json" target="_blank">
@@ -71,7 +73,9 @@ This will take roughly 30 minutes as this will provision:
 * An App Service serverless function with dynamic scaling and pricing
 * Storage accounts to house the VM VHD, the Function logging and the App Service API logging
 
-2. Once deployment is complete, navigate to your 
+2. Once deployment is complete, navigate to your App Service API App, its default name will be CADAPIMasterSite[hash] and click on the URI in the overview blade, see below:
+
+
 
 # The Logic App solution
 
