@@ -90,6 +90,11 @@ You will need to navigate to the code view to be able to select the json fields 
 
 ```
 Now add a For Each loop as we want to iterate through the resultset, so select the Body as the output from your previous request.
+
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ForEach.jpg)
+
+Now you want to add a step to query the Legacy CRM API which is inside the isolated network, add an API Management API step and once again query the Id, which in this case is the casenum output from the previous step and add the API Management subscription key.
+
+
 
 
