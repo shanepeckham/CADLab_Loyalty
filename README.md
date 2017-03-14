@@ -91,7 +91,7 @@ You will need to navigate to the code view to be able to select the json fields 
 ```
 Now add a For Each loop as we want to iterate through the resultset, so select the Body as the output from your previous request.
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ForEach.jpg)
+[!alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ForEach.jpg)
 
 Now you want to add a step to query the Legacy Ticket API which is inside the isolated network, add an API Management API step and once again query the Id, which in this case is the casenum output from the previous step and add the API Management subscription key.
 
@@ -120,7 +120,34 @@ Here is what your code view should look like:
 
 Now we want to add our Cognitive Services 'Detect Sentiment' step so that we can analyse the sentiment of the Ticket Feedback, your step should look like this:
 
-[!alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DetectSentiment.jpg)
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DetectSentiment.jpg)
+
+Your code view should look like this:
+```
+"Detect_Sentiment": {
+                        "inputs": {
+                            "body": {
+                                "text": "@body('Query_Cases_Feedback')['last_feedback']"
+                            },
+                            "host": {
+                                "api": {
+                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/cognitiveservicestextanalytics"
+                                },
+                                "connection": {
+                                    "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/sentiment"
+                        },
+                        "runAfter": {
+                            "Query_Cases_Feedback": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "ApiConnection"
+                    },
+```
 
 Now we want to add a condition to check the sentiment, if the probability outcome is less than 0.5, then it negative sentiment and therefore qualifies for our discount coupon.
 
