@@ -204,6 +204,16 @@ Click on the Deploy button below.
 
 NB - Make sure you use the same Deployment Name as you did in Step 1.
 
+You can test the function in the test harness within the function app itself, add this to the Request body:
+```
+{ "name": "hello" }
+```
+You should see the output look something like this:
+```
+{"couponUrl":"https://cadfuncstorrvhyzok7zv4gw.blob.core.windows.net/coupons/%5Bobject%20Object%5D.jpg?st=2017-03-14T20%3A27%3A59Z&se=2017-03-14T21%3A27%3A59Z&sp=r&sv=2015-12-11&sr=b&sig=6UUHFHY08JihUU8vT%2Fus%2Fot9Pl%2BZud6jaakMNTuCFZc%3D"} Status 200 Ok
+```
+Note, if you get an error upon first invocation, run it again and it should work. You are now ready to build the logic app.
+
 # The Logic App solution
 
 Create a HTTP Request Step, click save - you will receive an endpoint upon save. 
