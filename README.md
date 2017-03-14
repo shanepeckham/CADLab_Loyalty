@@ -103,7 +103,7 @@ This will navigate you to the Publisher portal, select Import API, see below:
 Now enter the following values:
 
 * Select "From Url"
-* Paste your API URL from step 2 and add ``` /swagger ``` on the end e.g. http://cadapimastersitervhyzok7zv4gw.azurewebsites.net/swagger
+* Paste your API URL from step 2 and add ``` /swagger ``` on the end e.g. http://cadapimastersite[hash].azurewebsites.net/swagger
 * Select "Swagger" as the specification format
 * Select New API
 * Type "Contacts" into the Web API URL Suffix field
