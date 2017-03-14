@@ -60,7 +60,7 @@ For this Hackathon you will require:
 
 The only parameter you need to change is the Deployment Name - give it any name as it will be used to generate a hash to ensure your site names are unique, see the image below:
 
-
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DeploymentName.jpg)
 
 This will take roughly 30 minutes as this will provision:
 
