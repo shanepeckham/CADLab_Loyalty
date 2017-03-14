@@ -187,6 +187,196 @@ With the following in the code view:
                                 "type": "Function"
                             }
 ```
+Now we want to send an email to every receipient to inform them that they can download a digital coupon which we have generated for them. Your email step should look like this:
 
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/Email.jpg)
 
+With the following code view:
+```
+"Send_email": {
+                        "inputs": {
+                            "body": {
+                                "Body": "Please get your coupon here: @{body('GenerateCoupon')}",
+                                "Subject": "Your Coupon has been generated",
+                                "To": "@{item()?['email']}"
+                            },
+                            "host": {
+                                "api": {
+                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/gmail"
+                                },
+                                "connection": {
+                                    "name": "@parameters('$connections')['gmail']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/Mail"
+                        },
+                        "runAfter": {
+                            "Condition": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "ApiConnection"
+                    }
+```
+
+The full code solution view looks like this:
+```
+{
+    "$connections": {
+        "value": {
+            "cognitiveservicestextanalytics": {
+                "connectionId": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.Web/connections/cognitiveservicestextanalytics",
+                "connectionName": "cognitiveservicestextanalytics",
+                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/providers/Microsoft.Web/locations/northeurope/managedApis/cognitiveservicestextanalytics"
+            },
+            "gmail": {
+                "connectionId": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.Web/connections/gmail",
+                "connectionName": "gmail",
+                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/providers/Microsoft.Web/locations/northeurope/managedApis/gmail"
+            }
+        }
+    },
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "For_each": {
+                "actions": {
+                    "Condition": {
+                        "actions": {
+                            "GenerateCoupon": {
+                                "inputs": {
+                                    "body": {
+                                        "name": "@item()?['name']"
+                                    },
+                                    "function": {
+                                        "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCADFunction/providers/Microsoft.Web/sites/MiniCADFunctionApp4pb56ec3fmsgg/functions/GenerateCoupon"
+                                    },
+                                    "method": "POST"
+                                },
+                                "runAfter": {},
+                                "type": "Function"
+                            }
+                        },
+                        "expression": "@less(body('Detect_Sentiment')?['score'], 0.5)",
+                        "runAfter": {
+                            "Detect_Sentiment": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "If"
+                    },
+                    "Detect_Sentiment": {
+                        "inputs": {
+                            "body": {
+                                "text": "@body('Query_Cases_Feedback')['last_feedback']"
+                            },
+                            "host": {
+                                "api": {
+                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/cognitiveservicestextanalytics"
+                                },
+                                "connection": {
+                                    "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/sentiment"
+                        },
+                        "runAfter": {
+                            "Query_Cases_Feedback": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "ApiConnection"
+                    },
+                    "Query_Cases_Feedback": {
+                        "inputs": {
+                            "api": {
+                                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.ApiManagement/service/minicad123api/apis/58af3fded9e0430e784c6b9d"
+                            },
+                            "method": "get",
+                            "pathTemplate": {
+                                "parameters": {
+                                    "id": "@{encodeURIComponent(item()?['caseNum'])}"
+                                },
+                                "template": "/LegacyAPI/contacts/{id}"
+                            },
+                            "subscriptionKey": "@{encodeURIComponent(triggerBody()['APIMKey'])}"
+                        },
+                        "runAfter": {},
+                        "type": "ApiManagement"
+                    },
+                    "Send_email": {
+                        "inputs": {
+                            "body": {
+                                "Body": "Please get your coupon here: @{body('GenerateCoupon')}",
+                                "Subject": "Your Coupon has been generated",
+                                "To": "@{item()?['email']}"
+                            },
+                            "host": {
+                                "api": {
+                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/gmail"
+                                },
+                                "connection": {
+                                    "name": "@parameters('$connections')['gmail']['connectionId']"
+                                }
+                            },
+                            "method": "post",
+                            "path": "/Mail"
+                        },
+                        "runAfter": {
+                            "Condition": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "ApiConnection"
+                    }
+                },
+                "foreach": "@body('Query_Contacts_by_Id')",
+                "runAfter": {
+                    "Query_Contacts_by_Id": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
+            "Query_Contacts_by_Id": {
+                "inputs": {
+                    "api": {
+                        "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.ApiManagement/service/minicad123api/apis/58af405bd9e0430e784c6b9f"
+                    },
+                    "method": "get",
+                    "pathTemplate": {
+                        "parameters": {
+                            "id": "@{encodeURIComponent(int(triggerBody()['id']))}"
+                        },
+                        "template": "/Contacts/contacts/{id}"
+                    },
+                    "subscriptionKey": "@{encodeURIComponent(triggerBody()['APIMKey'])}"
+                },
+                "runAfter": {},
+                "type": "ApiManagement"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "schema": {}
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    }
+}
+
+```
 
