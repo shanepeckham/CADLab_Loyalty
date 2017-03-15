@@ -1,17 +1,21 @@
-sudo apt-get update
+sudo apt-get -y update
 echo "Install npm"
-sudo apt-get install npm
+sudo apt-get -y install npm
 echo "Installing node"
-sudo apt-get install nodejs-legacy
-sudo apt-get install -y nodejs
+sudo apt-get -y install nodejs-legacy
+sudo apt-get -y install -y nodejs
 echo "Installing mysql-server"
-sudo apt-get install mysql-server
+sudo apt-get install -y debconf-utils
+export DEBIAN_FRONTEND="noninteractive"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password MiniCAD123"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password MiniCAD123"
+sudo apt-get install -y mysql-server
 echo "Installing mysql client"
-sudo apt-get install mysql-client
-echo "Installing node mysql"
+sudo apt-get -y install mysql-client
+echo "Installing node mysql"  
 npm install mysql
 echo installing git
-sudo apt-get install git
+sudo apt-get -y install git
 echo "MySQL load"
 mysql -u root -pMiniCAD123 -e "use mysql; CREATE TABLE IF NOT EXISTS cases (
   caseId INT(11) NOT NULL AUTO_INCREMENT,
