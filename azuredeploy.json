@@ -385,27 +385,6 @@
             "dependsOn": []
         },
         {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(variables('virtualMachines_LegacyVMAPI_name'),'/installcustomscript')]",
-            "apiVersion": "2016-03-30",
-            "location": "northeurope",
-            "dependsOn": [
-                "[variables('virtualMachines_LegacyVMAPI_name')]"
-            ],
-            "properties": {
-                "publisher": "Microsoft.Azure.Extensions",
-                "type": "CustomScript",
-                "typeHandlerVersion": "2.0",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "fileUris": [
-                        "https://raw.githubusercontent.com/shanepeckham/CADHackathon_Loyalty/master/installVM.sh"
-                    ],
-                    "commandToExecute": "bash installVM.sh"
-                    }
-            }
-        },
-        {
             "comments": "",
             "type": "Microsoft.ApiManagement/service",
             "sku": {
