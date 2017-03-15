@@ -40,7 +40,7 @@ The following technology components are used in this solution:
 
 # Solution flow
 
-![alt text](https://github.com/shanepeckham/MiniCADHackathon/blob/master/Typology.jpg)
+[logo]: https://github.com/shanepeckham/MiniCADHackathon/blob/master/Typology.jpg "Solution Flow"
 
 # The Hackathon component
 
