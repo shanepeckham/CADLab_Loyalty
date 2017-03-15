@@ -31,13 +31,12 @@ This solution will query a customer datastore, then get the last support case as
 The following technology components are used in this solution:
 
 *	Swagger enabled Node.js APIs running on Azure App Services (PaaS)
-*	Ubuntu with a custom extension template to rapidly provision and deploy a custom image with an running solution (IaaS)
+*	Ubuntu with a custom extension template to rapidly provision and deploy a custom image with a running legacy mysql solution (IaaS)
 *	Azure networking to isolate legacy workloads (IaaS)
 *	API Management to govern APIs and to bridge publicly accessible APIs with isolated APIs (SaaS) (IaaS)
 *	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens and Katrien de Graeve for the generate coupon function](https://github.com/xstof/Quiz) 
 *	Azure logic apps to provide serverless integration that is accessible to non-developers (Serveless)
 *	Azure Resource Manager templates to automate the provisioning and inflation of a full environment
-*	The Azure CLI 2.0
 
 # Solution flow
 
@@ -156,6 +155,7 @@ We will now ssh onto the machine using Bash for Windows on Windows 10, or putty 
 * Now type ``` sh installVM.sh ```
 * Enter 'Y' to any prompts - this will take around a minute
 * You will now be presented with the configuring MySQL-server screen. Enter the MySQL password here as MiniCAD123. You will need to do this twice and ensure you enter it correctly. The install will continue.
+![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/mysqlroot.jpg)
 * Upon completion you will see a screen similar to that below, with the final status 'Starting Legacy API'
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/StartingAPI.jpg)
 Your Legacy Ticket API should now be listening on port 8000 but this will not be accessible from the outside world.
