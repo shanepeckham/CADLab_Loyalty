@@ -399,7 +399,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/installVM.sh"
+                        "https://raw.githubusercontent.com/shanepeckham/CADHackathon_Loyalty/master/installVM.sh"
                     ],
                     "commandToExecute": "bash installVM.sh"
                     }
