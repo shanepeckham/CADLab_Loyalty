@@ -162,7 +162,7 @@ We will now ssh onto the machine using Bash for Windows on Windows 10, or putty 
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/StartingAPI.jpg)
 
-Your Legacy Ticket API should now be listening on port 8000 but this will not be accessible from the outside world.
+Your Legacy Ticket API should now be listening on port 8000 but this will not be accessible from the outside world. Note, if you restart your VM or want to restart the legacy api, simply navigate to the CADHackathon_Loyalty folder and run
 
 ## 5. Now we will import the Case Contact List API (Legacy Ticket API) into API Management.
 
