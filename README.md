@@ -152,7 +152,7 @@ We will now ssh onto the machine using Bash for Windows on Windows 10, or putty 
 * Type in password MiniCADAdmin123 - note this is hardcoded in the deploy
 * Paste the following in the command line: ``` git clone https://github.com/shanepeckham/CADHackathon_Loyalty.git ```
 * Now type ``` cd CADHackathon_Loyalty ```
-* Now type ``` sh installVM.sh ```
+* Now type ``` bash installVM.sh ```
 * Enter 'Y' to any prompts - this will take around a minute
 * You will now be presented with the configuring MySQL-server screen. Enter the MySQL password here as MiniCAD123. You will need to do this twice and ensure you enter it correctly. The install will continue.
 
