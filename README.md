@@ -52,7 +52,7 @@ For this Hackathon you will require:
 * A cognitive services trial account key, get it here - https://www.microsoft.com/cognitive-services/en-us/sign-up
 * A Gmail account for sending emails, get it here - https://accounts.google.com/SignUp?service=mail&continue=http%3A%2F%2Fmail.google.com%2Fmail%2Fe-11-14a952576b5f2ffe90ec0dd9823744e0-46a962fbb7947b68059374ddde7f29b5490a6b4d
 * Install Postman, get it here - https://www.getpostman.com
-* If using Windows 10 get Bash for Windows - https://blogs.windows.com/buildingapps/2016/03/30/run-bash-on-ubuntu-on-windows/ or putty if on an older version - http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+* If using Windows 10 get Bash for Windows - https://msdn.microsoft.com/en-us/commandline/wsl/install_guide or putty if on an older version - http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
 
 # How to install the solution
 
