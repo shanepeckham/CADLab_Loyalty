@@ -155,9 +155,13 @@ We will now ssh onto the machine using Bash for Windows on Windows 10, or putty 
 * Now type ``` sh installVM.sh ```
 * Enter 'Y' to any prompts - this will take around a minute
 * You will now be presented with the configuring MySQL-server screen. Enter the MySQL password here as MiniCAD123. You will need to do this twice and ensure you enter it correctly. The install will continue.
+
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/mysqlroot.jpg)
+
 * Upon completion you will see a screen similar to that below, with the final status 'Starting Legacy API'
+
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/StartingAPI.jpg)
+
 Your Legacy Ticket API should now be listening on port 8000 but this will not be accessible from the outside world.
 
 ## 5. Now we will import the Case Contact List API (Legacy Ticket API) into API Management.
