@@ -136,7 +136,7 @@ We have now set up the first API in our process.
 
 ## 4. Install the legacy Ticket API on the VM
 
-At the time of writing custom script extensions do not work in ARM templates so we will manually connect to the machine and run the build script.
+We could deploy this script as a custom script extension on the VM but that will complicate troubleshooting in a lab scenario so we will manually connect to the machine and run the build script, it is a single install script that will set up everything required.
 
 Navigate to your VM, the default name will be CADLegacyAPI[hash] and navigate to the Overview blade and copy the value in the field Public IP Address/DNS label, see below:
 
