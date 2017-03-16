@@ -65,7 +65,7 @@ For this Hackathon you will require:
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-The only parameter you need to change is the Deployment Name - give it any name as it will be used to generate a hash to ensure your site names are unique, see the image below:
+The only parameter you need to change is the Deployment Name - give it any name of 12 characters or less as it will be used to generate a hash to ensure your site names are unique, see the image below:
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DeploymentName.jpg)
 
