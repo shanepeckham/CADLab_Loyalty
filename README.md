@@ -1,4 +1,4 @@
-# *Customer Loyalty Hackathon*
+# *CAD Customer Loyalty Business Scenario Hackathon*
 
 # What is it?
 
