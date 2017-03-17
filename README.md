@@ -96,7 +96,7 @@ Now copy the URL without the ``` /docs ``` component and paste is somewhere for 
 
 ### Change the email addresses to in the contact API to your email
 
-* Navigate back to your  http://cadapimastersite[hash].azurewebsites.net/swagger
+* Navigate back to your API App in the Azure portal - e.g. http://cadapimastersite[hash].azurewebsites.net
 * Select the Advancted Tools blade and then click Go. This will open the Kudu console where we can be naughty and go and edit the source files 
 * In the top menu select Debug Console --> CMD
 * In the top tree folder structure click Site --> WWWRoot --> lib -- and click the pencil next to the contacts.json file. 
@@ -259,7 +259,7 @@ You can now invoke your logic app with Postman - add the URL and select POST. En
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/PostManHeaders.jpg)
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/PostManBody.jpg)
 
-Now add a step to include an API Management API - select your API "Contact List API"
+Now add a step to include an API Management API - select your API "Contact List API". You will want to select the method GET for contacts/{id}
 
 You will need to navigate to the code view to be able to select the json fields that will be posted as part of the body. Your code view should look like this:
 ```
