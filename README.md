@@ -1,4 +1,4 @@
-# *Customer Loyalty Hackathon*
+# *CAD Customer Loyalty Business Scenario Hackathon*
 
 # What is it?
 
@@ -31,7 +31,7 @@ This solution will query a customer datastore, then get the last support case as
 The following technology components are used in this solution:
 
 *	Swagger enabled Node.js APIs running on Azure App Services (PaaS)
-*	Ubuntu with a custom extension template to rapidly provision and deploy a custom image with a running legacy mysql solution (IaaS)
+*	Ubuntu with a custom extension template to rapidly provision and deploy a custom image with a running legacy mysql solution (IaaS) [Thanks Justin Davies for helping here](https://github.com/juda-ms)
 *	Azure networking to isolate legacy workloads (IaaS)
 *	API Management to govern APIs and to bridge publicly accessible APIs with isolated APIs (SaaS) (IaaS)
 *	Azure functions to run dynamic ‘pay-as-you-go’ compute (Serverless) [Thanks Christof Claasens and Katrien de Graeve for the generate coupon function](https://github.com/xstof/Quiz) 
@@ -65,7 +65,7 @@ For this Hackathon you will require:
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-The only parameter you need to change is the Deployment Name - give it any name as it will be used to generate a hash to ensure your site names are unique, see the image below:
+The only parameter you need to change is the Deployment Name - give it any name of 12 characters or less as it will be used to generate a hash to ensure your site names are unique, see the image below:
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DeploymentName.jpg)
 
@@ -93,6 +93,16 @@ Now type ``` /docs ``` after the azurewebsites.net part of the url and you shoul
 You should now be able to test a few methods of the API to check if how it works. It will query 3 contacts and methods exist to query all, query by Id, query associated Case Number by Id and query contact Email by Id.
 
 Now copy the URL without the ``` /docs ``` component and paste is somewhere for retrieval later on.
+
+### Change the email addresses to in the contact API to your email
+
+* Navigate back to your  http://cadapimastersite[hash].azurewebsites.net/swagger
+* Select the Advancted Tools blade and then click Go. This will open the Kudu console where we can be naughty and go and edit the source files 
+* In the top menu select Debug Console --> CMD
+* In the top tree folder structure click Site --> WWWRoot --> lib -- and click the pencil next to the contacts.json file. 
+* Change the email for the contact you want to change
+* Click Save
+* Restart your API App. This can be done from the Restart button on the overview blade
 
 ## 3. Now we will import the Contact List API into the API Management solution
 
@@ -136,7 +146,7 @@ We have now set up the first API in our process.
 
 ## 4. Install the legacy Ticket API on the VM
 
-At the time of writing custom script extensions do not work in ARM templates so we will manually connect to the machine and run the build script.
+We could deploy this script as a custom script extension on the VM but that will complicate troubleshooting in a lab scenario so we will manually connect to the machine and run the build script, it is a single install script that will set up everything required.
 
 Navigate to your VM, the default name will be CADLegacyAPI[hash] and navigate to the Overview blade and copy the value in the field Public IP Address/DNS label, see below:
 
@@ -152,18 +162,19 @@ We will now ssh onto the machine using Bash for Windows on Windows 10, or putty 
 * Type in password MiniCADAdmin123 - note this is hardcoded in the deploy
 * Paste the following in the command line: ``` git clone https://github.com/shanepeckham/CADHackathon_Loyalty.git ```
 * Now type ``` cd CADHackathon_Loyalty ```
-* Now type ``` sh installVM.sh ```
-* Enter 'Y' to any prompts - this will take around a minute
-* You will now be presented with the configuring MySQL-server screen. Enter the MySQL password here as MiniCAD123. You will need to do this twice and ensure you enter it correctly. The install will continue.
-
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/mysqlroot.jpg)
-
+* Now type ``` bash installVM.sh ```
 * Upon completion you will see a screen similar to that below, with the final status 'Starting Legacy API'
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/StartingAPI.jpg)
 
-Your Legacy Ticket API should now be listening on port 8000 but this will not be accessible from the outside world. Note, if you restart your VM or want to restart the legacy api, simply navigate to the CADHackathon_Loyalty folder and run
+Your Legacy Ticket API should now be listening on port 8000 but this will not be accessible from the outside world. Note, if you restart your VM or want to restart the legacy api, simply navigate to the /LegacyAPI/CADContacts folder and run node server.js. 
+e.g.
 
+```cd LegacyAPI 
+cd CADContacts
+node server.js
+```
+ 
 ## 5. Now we will import the Case Contact List API (Legacy Ticket API) into API Management.
 
 Navigate to API Management component provisioned within Azure, its name will be generated by default with the following format cadapim[hash].
@@ -225,6 +236,14 @@ You should see the output look something like this:
 Note, if you get an error upon first invocation, run it again and it should work. You are now ready to build the logic app.
 
 # The Logic App solution
+
+We want to get the customer's details, find their last associated case and then chek the feedback against it.
+
+### The data model
+
+See the diagram below for the simplistic data model to help you query the right data.
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/DemoDataModel.jpg)
 
 Create a HTTP Request Step, click save - you will receive an endpoint upon save. 
 
@@ -553,4 +572,12 @@ The full code solution view looks like this:
 }
 
 ```
+# Troubleshooting
 
+If you get and 'Internal Server Error' 500 on the Contact Case List (Legacy Ticket API) this could be because the node API has stopped. ssh into the VM and navigate to the /LegacyAPI/CADContacts folder and run 'node server.js'. 
+e.g.
+
+```cd LegacyAPI 
+cd CADContacts
+node server.js
+```
