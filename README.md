@@ -102,7 +102,7 @@ Now copy the URL without the ``` /docs ``` component and paste is somewhere for 
 * In the top tree folder structure click Site --> WWWRoot --> lib -- and click the pencil next to the contacts.json file. 
 * Change the email for the contact you want to change
 * Click Save
-* Restart your server. This can be done from the Restart button on the overview blade
+* Restart your API App. This can be done from the Restart button on the overview blade
 
 ## 3. Now we will import the Contact List API into the API Management solution
 
