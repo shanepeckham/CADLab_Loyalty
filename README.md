@@ -237,6 +237,14 @@ Note, if you get an error upon first invocation, run it again and it should work
 
 # The Logic App solution
 
+We want to get the customer's details, find their last associated case and then chek the feedback against it.
+
+### The data model
+
+See the diagram below for the simplistic data model to help you query the right data.
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/DemoDataModel.jpg)
+
 Create a HTTP Request Step, click save - you will receive an endpoint upon save. 
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/HTTP%20Request.jpg)
