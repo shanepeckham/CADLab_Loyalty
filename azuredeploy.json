@@ -440,7 +440,9 @@
                 "numberOfWorkers": 0
             },
             "resources": [],
-            "dependsOn": []
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_DynamicsFunction_name'))]"
+            ]
         },
         {
             "comments": "",
