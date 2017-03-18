@@ -259,6 +259,10 @@ You can now invoke your logic app with Postman - add the URL and select POST. En
 
 Now add a step to include an API Management API - select your API "Contact List API". You will want to select the method GET for contacts/{id}
 
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/contactsstep1.png)
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/contactsstep2.png)
+
 You will need to navigate to the code view to be able to select the json fields that will be posted as part of the body. Your code view should look like this:
 ```
 "Query_Contacts_by_Id": {
