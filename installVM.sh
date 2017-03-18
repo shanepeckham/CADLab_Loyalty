@@ -30,8 +30,6 @@ cd LegacyAPI
 git clone https://github.com/shanepeckham/CADContacts.git
 cd CADContacts
 git checkout mysql
-npm install forever -g
-forever start server.js
 npm install
 echo "Starting LegacyAPI"
 node server.js
