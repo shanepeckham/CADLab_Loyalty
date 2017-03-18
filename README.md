@@ -132,7 +132,7 @@ See below:
 
 You will now have imported an API that will now be accessible from the API Gateway. You can test it by clicking on Developer Portal, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DeveloperPortal.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/developerportal.png)
 
 Click APIs --> Contact List API --> Try It
 
