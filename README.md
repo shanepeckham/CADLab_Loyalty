@@ -88,7 +88,7 @@ Cannot GET /
 ```
 Now type ``` /docs ``` after the azurewebsites.net part of the url and you should see the Swagger editor open with a test harness to test the API:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/SwaggerHarness.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/SwaggerHarness.jpg)
 
 You should now be able to test a few methods of the API to check if how it works. It will query 3 contacts and methods exist to query all, query by Id, query associated Case Number by Id and query contact Email by Id.
 
