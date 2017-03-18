@@ -7,7 +7,7 @@
             "type": "string"
         },
          "sites_MiniCADFunctionApp_name": {
-            "defaultValue": "CADFunction",
+            "defaultValue": "CADFunc",
             "type": "string"
         },
         "storageAccounts_functionStorage_name": {
@@ -15,7 +15,7 @@
             "type": "string"
         },
         "serverfarms_DynamicsFunction_name": {
-            "defaultValue": "CADFunctionPlan",
+            "defaultValue": "CADFuncPl",
             "type": "string"
         },
         "repoURL": {
