@@ -150,7 +150,7 @@ We could deploy this script as a custom script extension on the VM but that will
 
 Navigate to your VM, the default name will be CADLegacyAPI[hash] and navigate to the Overview blade and copy the value in the field Public IP Address/DNS label, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/VMIP.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/vmip.png)
 
 We will now ssh onto the machine using Bash for Windows on Windows 10, or putty or just plain old terminal on a mac or Linux.
 
