@@ -235,6 +235,8 @@ Note, if you get an error upon first invocation, run it again and it should work
 
 # The Logic App solution
 
+## SPOILER ALERT - this is the full solution, so only look here if you get stuck!
+
 We want to get the customer's details, find their last associated case and then chek the feedback against it.
 
 ### The data model
@@ -244,6 +246,10 @@ See the diagram below for the simplistic data model to help you query the right 
 ![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/DemoDataModel.jpg)
 
 Create a HTTP Request Step, click save - you will receive an endpoint upon save. 
+
+Select the Request step, see below:
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/Request.png)
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/HTTP%20Request.jpg)
 
