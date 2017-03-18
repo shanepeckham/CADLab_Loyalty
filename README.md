@@ -128,7 +128,7 @@ Now enter the following values:
 
 See below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ImportAPIDetails.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/importapidetails.png)
 
 You will now have imported an API that will now be accessible from the API Gateway. You can test it by clicking on Developer Portal, see below:
 
