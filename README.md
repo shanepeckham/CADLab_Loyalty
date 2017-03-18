@@ -80,7 +80,7 @@ This will take roughly 30 minutes as this will provision:
 
 ## 2. Checking the Contact List API App: Once deployment is complete, navigate to your App Service API App, its default name will be CADAPIMasterSite[hash] and click on the URI in the overview blade, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/API%20URI.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/App_URI.png)
 
 This will navigate you to a URL that will display the following message if it was provisioned correctly:
 ```
