@@ -114,7 +114,7 @@ Click on the overview blade and select 'Publisher Portal' (note we will use the 
 
 This will navigate you to the Publisher portal, select Import API, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ImportAPI.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/importAPI.png)
 
 Now enter the following values:
 
