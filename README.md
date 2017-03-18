@@ -80,7 +80,7 @@ This will take roughly 30 minutes as this will provision:
 
 ## 2. Checking the Contact List API App: Once deployment is complete, navigate to your App Service API App, its default name will be CADAPIMasterSite[hash] and click on the URI in the overview blade, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/API%20URI.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/App_URI.png)
 
 This will navigate you to a URL that will display the following message if it was provisioned correctly:
 ```
@@ -88,7 +88,7 @@ Cannot GET /
 ```
 Now type ``` /docs ``` after the azurewebsites.net part of the url and you should see the Swagger editor open with a test harness to test the API:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/SwaggerHarness.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/swaggerharness.png)
 
 You should now be able to test a few methods of the API to check if how it works. It will query 3 contacts and methods exist to query all, query by Id, query associated Case Number by Id and query contact Email by Id.
 
@@ -110,11 +110,11 @@ Navigate to API Management component provisioned within Azure, its name will be 
 
 Click on the overview blade and select 'Publisher Portal' (note we will use the old portal while the new portal is still in preview), see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/APIMPublisherPortal.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/apimpublisherportal.png)
 
 This will navigate you to the Publisher portal, select Import API, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ImportAPI.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/importAPI.png)
 
 Now enter the following values:
 
@@ -128,17 +128,17 @@ Now enter the following values:
 
 See below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ImportAPIDetails.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/importapidetails.png)
 
 You will now have imported an API that will now be accessible from the API Gateway. You can test it by clicking on Developer Portal, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DeveloperPortal.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/developerportal.png)
 
 Click APIs --> Contact List API --> Try It
 
 This will take you to the test harness of API Management. Click the eyeball and copy the value in the field Ocp-Apim-Subscription-Key, this is your APIMKey which we will use extensively, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/APIMKey.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/apimkey.png)
 
 You can test the API now and it should return values with a status of 200 Ok.
 
@@ -150,7 +150,7 @@ We could deploy this script as a custom script extension on the VM but that will
 
 Navigate to your VM, the default name will be CADLegacyAPI[hash] and navigate to the Overview blade and copy the value in the field Public IP Address/DNS label, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/VMIP.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/vmip.png)
 
 We will now ssh onto the machine using Bash for Windows on Windows 10, or putty or just plain old terminal on a mac or Linux.
 
