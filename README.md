@@ -251,9 +251,9 @@ Select the Request step, see below:
 
 ![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/Request.png)
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/HTTP%20Request.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/httprequest.png)
 
-You can now invoke your logic app with Postman - add the URL and select POST. Ensure you have set the Header "Content-Type" with value "application/json". Select body, select "raw" and enter the follow value for your body content:
+Once you save the Logic app you will get and endpoint, you can now invoke your logic app with Postman - add the URL and select POST. Ensure you have set the Header "Content-Type" with value "application/json". Select body, select "raw" and enter the follow value for your body content:
 ```
 {
   "APIMKey": "[Your APIM Key goes here]",
