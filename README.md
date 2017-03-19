@@ -269,7 +269,7 @@ Now add a step to include an API Management API - select your API "Contact List 
 
 ![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/contactsstep2.png)
 
-You will need to navigate to the code view to be able to select the json fields that will be posted as part of the body. You will need to select the values you want from the body use javascript object notation. 
+You will need to navigate to the code view to be able to select the json fields that will be posted as part of the body. Note, you can select the values you are posting in the body using javascript object notation. 
 
 Your code view should look like this:
 ```
@@ -295,11 +295,15 @@ Navigating back to the designer should show your values resolved like below:
 
 ![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/querycontactsbyid.png)
 
-Now add a For Each loop as we want to iterate through the resultset, so select the Body as the output from your previous request.
+Now you need to query the Legacy Ticket API (Contacts Case List API) which is inside the isolated network to get the last case for that customer and retrieve the customer's feedback on the case. From the demo model hint above you want to use the caseNum field from the QueryContactsById to query the Legacy Ticket API field primary key field CaseId.
 
-[!alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ForEach.jpg)
+Add an API Management API step, select the Contact Case List API and once again query by Id, which in this CaseId which maps to the caseNum output from the previous step and add the API Management subscription key.
 
-Now you want to add a step to query the Legacy Ticket API which is inside the isolated network, add an API Management API step and once again query the Id, which in this case is the casenum output from the previous step and add the API Management subscription key.
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/querycasesbyid.png)
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/querycasesselectidmethod.png)
+
+Ensure you select the correct outputs from the previous step(s) as inputs to this step, see below:
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/QueryCasesFeedback.jpg)
 
