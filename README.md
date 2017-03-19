@@ -421,7 +421,11 @@ With the following in the code view:
                     }
                 },
 ```
-Now we want to send an email to every receipient to inform them that they can download a digital coupon which we have generated for them. Your email step should look like this:
+Now we want to send an email to every receipient to inform them that they can download a digital coupon which we have generated for them.
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/selectgmail.png)
+
+Your email step should look like this:
 
 ![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/Email.jpg)
 
