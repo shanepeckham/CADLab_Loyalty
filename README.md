@@ -403,23 +403,23 @@ With the following in code view:
 
 Now you can call the GenerateCoupon function if the condition is met, pass in the name of the user that you want to generate the digital coupon for:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/IfCondition.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/ifcondition0.png)
 
 With the following in the code view:
 ```
 "GenerateCoupon": {
-                                "inputs": {
-                                    "body": {
-                                        "name": "@item()?['name']"
-                                    },
-                                    "function": {
-                                        "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/[Your Resource Group]/providers/Microsoft.Web/sites/MiniCADFunctionApp4pb56ec3fmsgg/functions/GenerateCoupon"
-                                    },
-                                    "method": "POST"
-                                },
-                                "runAfter": {},
-                                "type": "Function"
+                        "inputs": {
+                            "body": {
+                                "name": "@body('QueryContactsById')[0]['name']"
+                            },
+                            "function": {
+                                "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/NewLoyaltyPlan/providers/Microsoft.Web/sites/CADFuncxdb3o43h6p7bq/functions/GenerateCoupon"
                             }
+                        },
+                        "runAfter": {},
+                        "type": "Function"
+                    }
+                },
 ```
 Now we want to send an email to every receipient to inform them that they can download a digital coupon which we have generated for them. Your email step should look like this:
 
