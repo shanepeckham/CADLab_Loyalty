@@ -427,16 +427,16 @@ Now we want to send an email to every receipient to inform them that they can do
 
 Your email step should look like this:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/Email.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/sendemail.png)
 
 With the following code view:
 ```
-"Send_email": {
+                    "Send_email": {
                         "inputs": {
                             "body": {
-                                "Body": "Please get your coupon here: @{body('GenerateCoupon')}",
-                                "Subject": "Your Coupon has been generated",
-                                "To": "@{item()?['email']}"
+                                "Body": "Please accept this coupon: @{body('GenerateCoupon')}",
+                                "Subject": "We heard that you were not happy",
+                                "To": "@{body('QueryContactsById')[0]['email']}"
                             },
                             "host": {
                                 "api": {
@@ -450,7 +450,7 @@ With the following code view:
                             "path": "/Mail"
                         },
                         "runAfter": {
-                            "Condition": [
+                            "GenerateCoupon": [
                                 "Succeeded"
                             ]
                         },
@@ -464,92 +464,40 @@ The full code solution view looks like this:
     "$connections": {
         "value": {
             "cognitiveservicestextanalytics": {
-                "connectionId": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.Web/connections/cognitiveservicestextanalytics",
+                "connectionId": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/NewLoyaltyPlan/providers/Microsoft.Web/connections/cognitiveservicestextanalytics",
                 "connectionName": "cognitiveservicestextanalytics",
-                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/providers/Microsoft.Web/locations/northeurope/managedApis/cognitiveservicestextanalytics"
+                "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/providers/Microsoft.Web/locations/northeurope/managedApis/cognitiveservicestextanalytics"
             },
             "gmail": {
-                "connectionId": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.Web/connections/gmail",
+                "connectionId": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/NewLoyaltyPlan/providers/Microsoft.Web/connections/gmail",
                 "connectionName": "gmail",
-                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/providers/Microsoft.Web/locations/northeurope/managedApis/gmail"
+                "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/providers/Microsoft.Web/locations/northeurope/managedApis/gmail"
             }
         }
     },
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
-            "For_each": {
+            "Condition": {
                 "actions": {
-                    "Condition": {
-                        "actions": {
-                            "GenerateCoupon": {
-                                "inputs": {
-                                    "body": {
-                                        "name": "@item()?['name']"
-                                    },
-                                    "function": {
-                                        "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCADFunction/providers/Microsoft.Web/sites/MiniCADFunctionApp4pb56ec3fmsgg/functions/GenerateCoupon"
-                                    },
-                                    "method": "POST"
-                                },
-                                "runAfter": {},
-                                "type": "Function"
-                            }
-                        },
-                        "expression": "@less(body('Detect_Sentiment')?['score'], 0.5)",
-                        "runAfter": {
-                            "Detect_Sentiment": [
-                                "Succeeded"
-                            ]
-                        },
-                        "type": "If"
-                    },
-                    "Detect_Sentiment": {
+                    "GenerateCoupon": {
                         "inputs": {
                             "body": {
-                                "text": "@body('Query_Cases_Feedback')['last_feedback']"
+                                "name": "@body('QueryContactsById')[0]['name']"
                             },
-                            "host": {
-                                "api": {
-                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/cognitiveservicestextanalytics"
-                                },
-                                "connection": {
-                                    "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
-                                }
-                            },
-                            "method": "post",
-                            "path": "/sentiment"
-                        },
-                        "runAfter": {
-                            "Query_Cases_Feedback": [
-                                "Succeeded"
-                            ]
-                        },
-                        "type": "ApiConnection"
-                    },
-                    "Query_Cases_Feedback": {
-                        "inputs": {
-                            "api": {
-                                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.ApiManagement/service/minicad123api/apis/58af3fded9e0430e784c6b9d"
-                            },
-                            "method": "get",
-                            "pathTemplate": {
-                                "parameters": {
-                                    "id": "@{encodeURIComponent(item()?['caseNum'])}"
-                                },
-                                "template": "/LegacyAPI/contacts/{id}"
-                            },
-                            "subscriptionKey": "@{encodeURIComponent(triggerBody()['APIMKey'])}"
+                            "function": {
+                                "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/NewLoyaltyPlan/providers/Microsoft.Web/sites/CADFuncxdb3o43h6p7bq/functions/GenerateCoupon"
+                            }
                         },
                         "runAfter": {},
-                        "type": "ApiManagement"
+                        "type": "Function"
                     },
                     "Send_email": {
                         "inputs": {
                             "body": {
-                                "Body": "Please get your coupon here: @{body('GenerateCoupon')}",
-                                "Subject": "Your Coupon has been generated",
-                                "To": "@{item()?['email']}"
+                                "Body": "Please accept this coupon: @{body('GenerateCoupon')}",
+                                "Subject": "We heard that you were not happy",
+                                "To": "@{body('QueryContactsById')[0]['email']}"
                             },
                             "host": {
                                 "api": {
@@ -563,34 +511,78 @@ The full code solution view looks like this:
                             "path": "/Mail"
                         },
                         "runAfter": {
-                            "Condition": [
+                            "GenerateCoupon": [
                                 "Succeeded"
                             ]
                         },
                         "type": "ApiConnection"
                     }
                 },
-                "foreach": "@body('Query_Contacts_by_Id')",
+                "expression": "@less(body('Detect_Sentiment')?['score'], 0.5)",
                 "runAfter": {
-                    "Query_Contacts_by_Id": [
+                    "Detect_Sentiment": [
                         "Succeeded"
                     ]
                 },
-                "type": "Foreach"
+                "type": "If"
             },
-            "Query_Contacts_by_Id": {
+            "Detect_Sentiment": {
+                "inputs": {
+                    "body": {
+                        "text": "@{body('QueryCasesById')?['last_feedback']}"
+                    },
+                    "host": {
+                        "api": {
+                            "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/cognitiveservicestextanalytics"
+                        },
+                        "connection": {
+                            "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/sentiment"
+                },
+                "runAfter": {
+                    "QueryCasesById": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
+            "QueryCasesById": {
                 "inputs": {
                     "api": {
-                        "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/MiniCAD/providers/Microsoft.ApiManagement/service/minicad123api/apis/58af405bd9e0430e784c6b9f"
+                        "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/NewLoyaltyPlan/providers/Microsoft.ApiManagement/service/cadapimxdb3o43h6p7bq/apis/58cd5516dc78ac0f84da1289"
                     },
                     "method": "get",
                     "pathTemplate": {
                         "parameters": {
-                            "id": "@{encodeURIComponent(int(triggerBody()['id']))}"
+                            "id": "@{encodeURIComponent(body('QueryContactsById')[0]['caseNum'])}"
+                        },
+                        "template": "/LegacyAPI/contacts/{id}"
+                    },
+                    "subscriptionKey": "@{triggerBody()['APIMKey']}"
+                },
+                "runAfter": {
+                    "QueryContactsById": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiManagement"
+            },
+            "QueryContactsById": {
+                "inputs": {
+                    "api": {
+                        "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/NewLoyaltyPlan/providers/Microsoft.ApiManagement/service/cadapimxdb3o43h6p7bq/apis/58cd4c45dc78ac0f84da1287"
+                    },
+                    "method": "get",
+                    "pathTemplate": {
+                        "parameters": {
+                            "id": "@{encodeURIComponent(triggerBody()['id'])}"
                         },
                         "template": "/Contacts/contacts/{id}"
                     },
-                    "subscriptionKey": "@{encodeURIComponent(triggerBody()['APIMKey'])}"
+                    "subscriptionKey": "@{triggerBody()['APIMKey']}"
                 },
                 "runAfter": {},
                 "type": "ApiManagement"
