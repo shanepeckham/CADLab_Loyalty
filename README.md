@@ -269,27 +269,32 @@ Now add a step to include an API Management API - select your API "Contact List 
 
 ![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/contactsstep2.png)
 
-You will need to navigate to the code view to be able to select the json fields that will be posted as part of the body. Your code view should look like this:
+You will need to navigate to the code view to be able to select the json fields that will be posted as part of the body. You will need to select the values you want from the body use javascript object notation. 
+
+Your code view should look like this:
 ```
-"Query_Contacts_by_Id": {
+            "QueryContactsById": {
                 "inputs": {
                     "api": {
-                        "id": "/subscriptions/[subscription id]/resourceGroups/MiniCAD/providers/Microsoft.ApiManagement/service/minicad123api/apis/[api id]"
+                        "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/[ResourceGroup]/providers/Microsoft.ApiManagement/service/cadapimxdb3o43h6p7bq/apis/58cd4c45dc78ac0f84da1287"
                     },
                     "method": "get",
                     "pathTemplate": {
                         "parameters": {
-                            "id": "@{encodeURIComponent(int(triggerBody()['id']))}"
+                            "id": "@{encodeURIComponent(triggerBody()['id'])}"
                         },
                         "template": "/Contacts/contacts/{id}"
                     },
-                    "subscriptionKey": "@{encodeURIComponent(triggerBody()['APIMKey'])}"
+                    "subscriptionKey": "@{triggerBody()['APIMKey']}"
                 },
                 "runAfter": {},
                 "type": "ApiManagement"
             }
-
 ```
+Navigating back to the designer should show your values resolved like below:
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/querycontactsbyid.png)
+
 Now add a For Each loop as we want to iterate through the resultset, so select the Body as the output from your previous request.
 
 [!alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/ForEach.jpg)
