@@ -305,27 +305,45 @@ Add an API Management API step, select the Contact Case List API and once again 
 
 Ensure you select the correct outputs from the previous step(s) as inputs to this step, see below:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/QueryCasesFeedback.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/querycasebycasenum.png)
 
-Here is what your code view should look like:
+Now if you applied the logic from the previous step to select the correct outut field values (which would be a sensible approach) you will probably get the following error:
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/querycaseserror.png)
+
+This is due to us outputting an array but not specificing which record/index we want to use. Change the following line from
 ```
-"Query_Cases_Feedback": {
-                        "inputs": {
-                            "api": {
-                                "id": "/subscriptions/de019774-dddc-40a9-9515-51f9df268c95/resourceGroups/[Your Resource Group]/providers/Microsoft.ApiManagement/service/minicad123api/apis/58af3fded9e0430e784c6b9d"
-                            },
-                            "method": "get",
-                            "pathTemplate": {
-                                "parameters": {
-                                    "id": "@{encodeURIComponent(item()?['caseNum'])}"
-                                },
-                                "template": "/LegacyAPI/contacts/{id}"
-                            },
-                            "subscriptionKey": "@{encodeURIComponent(triggerBody()['APIMKey'])}"
-                        },
-                        "runAfter": {},
-                        "type": "ApiManagement"
+"id": "@{encodeURIComponent(body('QueryContactsById')?['caseNum'])}"
+```
+to use the first value of the array, namely the 0 index:
+
+```
+  "id": "@{encodeURIComponent(body('QueryContactsById')[0]['caseNum'])}"
+```
+
+Here is what your code view should look like for this step:
+```
+            "QueryCasesById": {
+                "inputs": {
+                    "api": {
+                        "id": "/subscriptions/1b987fd6-b38e-40a1-bca8-4f67e6272c12/resourceGroups/[ResourceGroup]/providers/Microsoft.ApiManagement/service/cadapimxdb3o43h6p7bq/apis/58cd5516dc78ac0f84da1289"
                     },
+                    "method": "get",
+                    "pathTemplate": {
+                        "parameters": {
+                            "id": "@{encodeURIComponent(body('QueryContactsById')[0]['caseNum'])}"
+                        },
+                        "template": "/LegacyAPI/contacts/{id}"
+                    },
+                    "subscriptionKey": "@{triggerBody()['APIMKey']}"
+                },
+                "runAfter": {
+                    "QueryContactsById": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiManagement"
+            },
 ```
 
 Now we want to add our Cognitive Services 'Detect Sentiment' step so that we can analyse the sentiment of the Ticket Feedback, your step should look like this:
