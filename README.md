@@ -346,35 +346,41 @@ Here is what your code view should look like for this step:
             },
 ```
 
-Now we want to add our Cognitive Services 'Detect Sentiment' step so that we can analyse the sentiment of the Ticket Feedback, your step should look like this:
+Now we want to add our Cognitive Services 'Detect Sentiment' (note you will need to have your key ready that you got when you signed up for the Text Analytics preview as part of the pre-requisites) step  so that we can analyse the sentiment of the Ticket Feedback:
 
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/DetectSentiment.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/searchdetect.png)
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/selectsentiment.png)
+
+We now need to make sure we send the correct output from the QueryCasesById step to the Detect Sentiment step, use the javascript dot notation approach again with an index value. Your steps should look like this:
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/lastfeedback.png)
 
 Your code view should look like this:
 ```
-"Detect_Sentiment": {
-                        "inputs": {
-                            "body": {
-                                "text": "@body('Query_Cases_Feedback')['last_feedback']"
-                            },
-                            "host": {
-                                "api": {
-                                    "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/[YourCognitiveServicesConnectionName]"
-                                },
-                                "connection": {
-                                    "name": "@parameters('$connections')[YourCognitiveServicesConnectionName]['connectionId']"
-                                }
-                            },
-                            "method": "post",
-                            "path": "/sentiment"
-                        },
-                        "runAfter": {
-                            "Query_Cases_Feedback": [
-                                "Succeeded"
-                            ]
-                        },
-                        "type": "ApiConnection"
+            "Detect_Sentiment": {
+                "inputs": {
+                    "body": {
+                        "text": "@{body('QueryCasesById')?['last_feedback']}"
                     },
+                    "host": {
+                        "api": {
+                            "runtimeUrl": "https://logic-apis-northeurope.azure-apim.net/apim/cognitiveservicestextanalytics"
+                        },
+                        "connection": {
+                            "name": "@parameters('$connections')['cognitiveservicestextanalytics']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/sentiment"
+                },
+                "runAfter": {
+                    "QueryCasesById": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection"
+            },
 ```
 
 Now we want to add a condition to check the sentiment, if the probability outcome is less than 0.5, then it negative sentiment and therefore qualifies for our discount coupon.
