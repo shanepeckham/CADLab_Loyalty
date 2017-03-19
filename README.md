@@ -260,8 +260,8 @@ Once you save the Logic app you will get and endpoint, you can now invoke your l
   "id": 1
 }
 ```
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/PostManHeaders.jpg)
-![alt text](https://github.com/shanepeckham/CADHackathon_Loyalty/blob/master/Images/PostManBody.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/postmanheaders.png)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/postmanbody.png)
 
 Now add a step to include an API Management API - select your API "Contact List API". You will want to select the method GET for contacts/{id}
 
