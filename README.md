@@ -237,7 +237,7 @@ Note, if you get an error upon first invocation, run it again and it should work
 
 ## SPOILER ALERT - this is the full solution, so only look here if you get stuck!
 
-We want to get the customer's details, find their last associated case and then chek the feedback against it.
+We want to get the customer's details, find their last associated case and then check the feedback against it.
 
 ### The data model
 
