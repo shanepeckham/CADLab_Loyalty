@@ -311,7 +311,7 @@ Now if you applied the logic from the previous step to select the correct outut 
 
 ![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/querycaseserror.png)
 
-This is due to us outputting an array but not specificing which record/index we want to use. Change the following line from
+This is due to us outputting an array but not specifying which record/index we want to use. Change the following line from
 ```
 "id": "@{encodeURIComponent(body('QueryContactsById')?['caseNum'])}"
 ```
