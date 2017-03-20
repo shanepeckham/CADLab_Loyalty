@@ -12,7 +12,7 @@ This repository will provision an environment that may be used as a Hackathon to
 
 # What does it showcase?
 
-This solution brings together Infrastructure as a Service (IaaS), Platform as a Service (PaaS), Software as a Service (SaaS) and Serverless components on Microsoft Azure to build a realistic end to end scenario common in retail. Furthermore, the democratization of AI is tied in nicely by incorporating Cognitive Services to perform text analysis and determine the sentiment of a customer’s feedback.
+This solution brings together Infrastructure as a Service (IaaS), Platform as a Service (PaaS), Software as a Service (SaaS) and Serverless components on Microsoft Azure to build a realistic end to end scenario to nurture customers. Furthermore, the democratization of AI is tied in nicely by incorporating Cognitive Services to perform text analysis and determine the sentiment of a customer’s feedback.
 
 # The end to end scenario
 
