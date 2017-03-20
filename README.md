@@ -165,7 +165,7 @@ We will now ssh onto the machine using Bash for Windows on Windows 10, or putty 
 * Now type ``` bash installVM.sh ```
 * Upon completion you will see a screen similar to that below, with the final status 'Starting Legacy API'
 
-![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/startingapi.png)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/startinglegacyapi.png)
 
 Your Legacy Ticket API should now be listening on port 8000 but this will not be accessible from the outside world. Note, if you restart your VM or want to restart the legacy api, simply navigate to the /LegacyAPI/CADContacts folder and run node server.js. 
 e.g.
