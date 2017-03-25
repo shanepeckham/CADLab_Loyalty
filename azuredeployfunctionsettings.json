@@ -70,7 +70,7 @@
             "kind": "Storage",
             "name": "[variables('storageAccounts_functionStorage_name')]",
             "apiVersion": "2016-01-01",
-            "location": "northeurope",
+            "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {},
             "resources": [],
