@@ -1,4 +1,4 @@
-# *CAD Customer Loyalty Business Scenario Hackathon*
+# *CAD Customer Loyalty Business Scenario Lab*
 
 # What is it?
 
@@ -42,13 +42,13 @@ The following technology components are used in this solution:
 
 ![alt text](https://github.com/shanepeckham/MiniCADHackathon/blob/master/Typology.jpg "Solution Flow")
 
-# The Hackathon component
+# The Lab component
 
-This solution will install and configure all of the components required to build the end to end Loyalty scenario. The Hackathon attendees just need to wire everything together in a Logic App. 
+This solution will install and configure all of the components required to build the end to end Loyalty scenario. The Lab attendees just need to wire everything together in a Logic App. 
 
 # Preparing for the solution
 
-For this Hackathon you will require:
+For this Lab you will require:
 * A cognitive services trial account key, get it here - https://www.microsoft.com/cognitive-services/en-us/sign-up
 * A Gmail account for sending emails, get it here - https://accounts.google.com/SignUp?service=mail&continue=http%3A%2F%2Fmail.google.com%2Fmail%2Fe-11-14a952576b5f2ffe90ec0dd9823744e0-46a962fbb7947b68059374ddde7f29b5490a6b4d
 * Install Postman, get it here - https://www.getpostman.com
