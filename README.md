@@ -2,7 +2,7 @@
 
 # What is it?
 
-This repository will provision an environment that may be used as a Hackathon to build an end to end scenario that does the following:
+This repository will provision an environment that may be used as a Lab to build an end to end scenario that does the following:
 
 *	Query a Contact List API for a customer
 *	Query our legacy on-prem Ticket system to get the customer’s last feedback
