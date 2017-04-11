@@ -434,7 +434,7 @@
             "kind": "app",
             "name": "[variables('serverfarms_CADContactsAPIMaster_name')]",
             "apiVersion": "2015-08-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "properties": {
              "name": "[variables('serverfarms_CADContactsAPIMaster_name')]",
                 "numberOfWorkers": 0
