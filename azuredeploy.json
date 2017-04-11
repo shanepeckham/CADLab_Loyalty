@@ -393,7 +393,7 @@
             },
             "name": "[variables('service_cadapim_name')]",
             "apiVersion": "2016-07-07",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {
                 "publisherEmail": "[parameters('APIM_Publisher_Email')]",
@@ -411,7 +411,7 @@
                 "additionalLocations": null,
                 "vpnconfiguration": {
                     "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_CADVNET_name')), '/subnets/internal')]",
-                    "location": "North Europe"
+                    "location": "[resourceGroup().location]",
                 },
                 "customProperties": null,
                 "vpnType": 1
@@ -450,7 +450,7 @@
             "kind": "api",
             "name": "[variables('sites_CADContactsAPIMaster_name')]",
             "apiVersion": "2015-08-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "tags": {
             },
             "properties": {
@@ -510,7 +510,7 @@
             "kind": "functionapp",
             "name": "[variables('serverfarms_DynamicsFunction_name')]",
             "apiVersion": "2015-08-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "properties": {
                "name": "[variables('serverfarms_DynamicsFunction_name')]",  
                 "numberOfWorkers": 0
@@ -540,7 +540,7 @@
             "kind": "functionapp",
             "name": "[variables('sites_MiniCADFunctionApp_name')]",
             "apiVersion": "2015-08-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "tags": {
             },
             "properties": {
