@@ -52,7 +52,7 @@
             "kind": "functionapp",
             "name": "[variables('serverfarms_DynamicsFunction_name')]",
             "apiVersion": "2015-08-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "properties": {
                "name": "[variables('serverfarms_DynamicsFunction_name')]",  
                 "numberOfWorkers": 0
@@ -82,7 +82,7 @@
             "kind": "functionapp",
             "name": "[variables('sites_MiniCADFunctionApp_name')]",
             "apiVersion": "2015-08-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "tags": {
             },
             "properties": {
