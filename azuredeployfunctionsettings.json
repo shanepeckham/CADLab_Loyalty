@@ -122,9 +122,7 @@
                     "properties": {
                         "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccounts_functionStorage_name'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name')), '2015-05-01-preview').key1,';')]", 
                         "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccounts_functionStorage_name'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name')), '2015-05-01-preview').key1,';')]", 
-                        "FUNCTIONS_EXTENSION_VERSION": "latest",
-                        "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccounts_functionStorage_name'), ';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccounts_functionStorage_name')), '2015-05-01-preview').key1,';')]", 
-                        "WEBSITE_CONTENTSHARE": "[variables('sites_MiniCADFunctionApp_name')]
+                        "FUNCTIONS_EXTENSION_VERSION": "latest"
                     }
                 } 
                 ],
