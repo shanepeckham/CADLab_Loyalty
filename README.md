@@ -225,15 +225,15 @@ NB - Make sure you use the same Deployment Name as you did in Step 1.
 
 Update: Azure functions has recently changed and the new release is not deploying the code correctly. Navigate to Platform Features --> Deployment Options, see below:
 
-![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/newfuncdeploy1.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/newfuncdeploy1.png)
 
 In the pane on the right click the 'Sync' button. This will redploy the code and will take around 2-3 minutes, see below:
 
-![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/newfuncdeploy2.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/newfuncdeploy2.png)
 
 Once complete, click the Refresh icon as highlighted below and you should see the following:
 
-![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/newfuncdeploy3.jpg)
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/newfuncdeploy3.png)
 
 You can test the function in the test harness within the function app itself, add this to the Request body:
 ```
