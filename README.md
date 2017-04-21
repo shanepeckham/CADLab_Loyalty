@@ -630,3 +630,11 @@ e.g.
 cd CADContacts
 node server.js
 ```
+
+# Securing this environment
+
+The security lab for this environment may be found here [Securing the Loyalty environment](https://github.com/shanepeckham/CADLab_Loyalty_Security) 
+
+
+
+
