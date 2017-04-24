@@ -56,7 +56,7 @@ For this Lab you will require:
 
 # How to install the solution
 
-[Installing](#https://github.com/shanepeckham/CADLab_Loyalty/blob/master/README.md#anchors-in-markdown)
+[Read our installation guide](#how-to-install-the-solution)
 
 ## 1. Provisioning the components: Select Deploy to Azure to deploy to your Azure instance that you are currently logged in to.
 
