@@ -121,6 +121,29 @@
             "metadata": {
                 "description": "The branch of the GitHub repository to use."
             }
+        },
+        "vmSize": {
+          "type": "string",
+          "defaultValue": "Standard_A3",
+          "allowedValues": [
+            "Standard_A3",
+            "Standard_A4",
+            "Standard_A5",
+            "Standard_A6",
+            "Standard_A7",
+            "Standard_A8",
+            "Standard_A9",
+            "Standard_A10",
+            "Standard_A11",
+            "Standard_D3",
+            "Standard_D4",
+            "Standard_D12",
+            "Standard_D13",
+            "Standard_D14"
+          ],
+          "metadata": {
+            "description": "This is the size of your VM"
+          }
         }
     },
     "variables": {
@@ -153,7 +176,7 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_DS1_v2"
+                    "vmSize": "[parameters('virtualMachines_CADLegacyAPI_adminPassword')]"
                 },
                 "storageProfile": {
                     "imageReference": {
