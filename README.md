@@ -633,6 +633,11 @@ cd CADContacts
 node server.js
 ```
 
+If you get a 404 - Resource not found within the Logic app invoking the Legacy API, ensure that you have selected *HTTPS* not *HTTP* as the Web API URL Scheme. Check your settings are the same as in this image below:
+
+![alt text](https://github.com/shanepeckham/CADLab_Loyalty/blob/master/Images/troubleshoot1.png)
+
+
 # Securing this environment
 
 The security lab for this environment may be found here [Securing the Loyalty environment](https://github.com/shanepeckham/CADLab_Loyalty_Security) 
