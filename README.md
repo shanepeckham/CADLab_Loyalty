@@ -630,8 +630,9 @@ e.g.
 
 ```cd LegacyAPI 
 cd CADContacts
-node server.js
+nohup node server.js &
 ```
+The logout out of the ssh session.
 
 If you get a 404 - Resource not found within the Logic app invoking the Legacy API, ensure that you have selected *HTTPS* not *HTTP* as the Web API URL Scheme. Check your settings are the same as in this image below:
 
