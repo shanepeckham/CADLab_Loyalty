@@ -440,7 +440,7 @@
                 "vpnconfiguration": {
                     "subnetResourceId": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworks_CADVNET_name')), '/subnets/internal')]",
                     "location": "[resourceGroup().location]",
-                }
+                },
                 "customProperties": null,
                 "vpnType": 1
             },
